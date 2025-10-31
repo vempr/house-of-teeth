@@ -1,0 +1,154 @@
+[gd_scene load_steps=18 format=3 uid="uid://co3iptt2fce3t"]
+
+[ext_resource type="Script" uid="uid://bc875eqg35ov1" path="res://scripts/monster.gd" id="1_1cbnp"]
+[ext_resource type="Texture2D" uid="uid://b5ur05rhbc7a0" path="res://assets/monster/tooth walker sprite-Sheet.png" id="1_uwnm8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwnm8"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei7v0"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1v1i4"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n78d1"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7han3"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70tfl"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(64, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cbnp"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c47ug"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlss8"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gp4s5"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdl1p"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8ewj"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yce20"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ei7v0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwnm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ei7v0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1v1i4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n78d1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7han3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70tfl")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cbnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c47ug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlss8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gp4s5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdl1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8ewj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yce20")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cbnp"]
+size = Vector2(216, 178)
+
+[node name="Monster" type="Node2D"]
+script = ExtResource("1_1cbnp")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_ei7v0")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(15, 26)
+shape = SubResource("RectangleShape2D_1cbnp")
+
+[node name="AttackTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.8
+
+[node name="Rays" type="Node2D" parent="."]
+
+[node name="RayCastRight" type="RayCast2D" parent="Rays"]
+unique_name_in_owner = true
+target_position = Vector2(50, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="Rays"]
+unique_name_in_owner = true
+target_position = Vector2(-50, 0)
+
+[node name="RayCastUp" type="RayCast2D" parent="Rays"]
+unique_name_in_owner = true
+target_position = Vector2(0, -50)
+
+[node name="RayCastDown" type="RayCast2D" parent="Rays"]
+unique_name_in_owner = true
+target_position = Vector2(0, 150)
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -4,11 +4,11 @@ var MAX_SPEED := 250.0
 var ACCELERATION := MAX_SPEED / 0.15
 var FRICTION := ACCELERATION
 
-var health := 5
 var last_direction := Vector2.ZERO
 var current_velocity := Vector2.ZERO
 @onready var anim := %AnimatedSprite
 var is_playing_open_anim := false
+var is_playing_hurt_anim := false
 
 
 func _physics_process(delta: float) -> void:
@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction != Vector2.ZERO:
 		last_direction = direction
-		
+	
 	if direction != Vector2.ZERO:
 		current_velocity = current_velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 	else:
@@ -26,6 +26,9 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = current_velocity
 	move_and_slide()
+	
+	if is_playing_hurt_anim:
+		return
 	
 	if direction == Vector2.ZERO:
 		if abs(last_direction.x) >= abs(last_direction.y):
@@ -67,3 +70,18 @@ func _on_pill_used() -> void:
 
 func _on_pill_wore_off() -> void:
 	MAX_SPEED = 250.0
+
+
+func _on_monster_player_attacked() -> void:
+	is_playing_hurt_anim = true
+	
+	if last_direction.y < 0 && last_direction.x == 0:
+		anim.play("hurt_up")
+	elif last_direction.y > 0 && last_direction.x == 0:
+		anim.play("hurt_down")
+	else:
+		anim.play("hurt_right")
+		anim.flip_h = last_direction.x < 0
+	
+	await anim.animation_finished
+	is_playing_hurt_anim = false
