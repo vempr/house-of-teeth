@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rjekdiajjoed"
-path="res://.godot/imported/tooth.png-0827869832727c709261fac827180b94.ctex"
+uid="uid://bmu4lfehnnpol"
+path="res://.godot/imported/pill.png-b2885e4fd7a1b1a1bfc30c0ddb1db470.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tooth/tooth.png"
-dest_files=["res://.godot/imported/tooth.png-0827869832727c709261fac827180b94.ctex"]
+source_file="res://assets/aseprite/pill.png"
+dest_files=["res://.godot/imported/pill.png-b2885e4fd7a1b1a1bfc30c0ddb1db470.ctex"]
 
 [params]
 

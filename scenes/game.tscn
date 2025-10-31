@@ -1,9 +1,17 @@
-[gd_scene load_steps=7 format=4 uid="uid://dxfu854duwa3o"]
+[gd_scene load_steps=14 format=4 uid="uid://dxfu854duwa3o"]
 
 [ext_resource type="Script" uid="uid://cmne6wlc863bf" path="res://scripts/game.gd" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c7ck1oe8vov4d" path="res://assets/house/4 BigSet.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://miuv0twkkost" path="res://scenes/player.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cq17o4x3ewrfe" path="res://scenes/chest.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://bapm6iyiqj0om" path="res://scenes/pill.tscn" id="5_iywne"]
+[ext_resource type="Shader" uid="uid://bku1ttlbl4krw" path="res://shaders/crt.gdshader" id="6_p57ef"]
+[ext_resource type="Script" uid="uid://doxn6tui2je14" path="res://scripts/overlay.gd" id="6_u5sy4"]
+[ext_resource type="Shader" uid="uid://fgcrkyjwhmji" path="res://shaders/desaturate.gdshader" id="8_gee14"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gee14"]
+shader = ExtResource("8_gee14")
+shader_parameter/saturation = 0.26
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -259,7 +267,68 @@ physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 sources/0 = SubResource("TileSetAtlasSource_lnu2h")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0tnpc"]
+shader = ExtResource("8_gee14")
+shader_parameter/saturation = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u5sy4"]
+shader = ExtResource("6_p57ef")
+shader_parameter/screen_size = Vector2(1440, 1080)
+shader_parameter/viewport_size = Vector2(1440, 1080)
+shader_parameter/hardScan = -17.0
+shader_parameter/hardPix = 0.0
+shader_parameter/warpX = 0.111
+shader_parameter/warpY = 0.041
+shader_parameter/maskDark = 0.0
+shader_parameter/maskLight = 1.5
+shader_parameter/scaleInLinearGamma = false
+shader_parameter/shadowMask = 3
+shader_parameter/brightBoost = 1.0
+shader_parameter/hardBloomPix = -1.5
+shader_parameter/hardBloomScan = -2.0
+shader_parameter/bloomAmount = 0.15
+shader_parameter/shape = 2.0
+shader_parameter/doBloom = true
+shader_parameter/enable_compression = false
+shader_parameter/compression_intensity = 20.0
+shader_parameter/compression_quantization = 16.0
+shader_parameter/compression_block_size = 8.0
+shader_parameter/compression_blend = 0.7
+shader_parameter/enable_chromatic_aberration = true
+shader_parameter/red_shift = Vector2(0.002, 0)
+shader_parameter/green_shift = Vector2(0, 0)
+shader_parameter/blue_shift = Vector2(-0.002, 0)
+shader_parameter/aberration_bias = 1.0
+shader_parameter/aberration_blend = 0.8
+shader_parameter/enable_lens_distortion = true
+shader_parameter/distortion_intensity = 0.05
+shader_parameter/distortion_magnifier = 1.0
+shader_parameter/distortion_invert = false
+shader_parameter/enable_noise = true
+shader_parameter/noise_intensity = 0.02
+shader_parameter/noise_scale = 66.0
+shader_parameter/noise_framerate = 15.0
+shader_parameter/noise_midtones = 0.9
+shader_parameter/noise_shadows = 0.7
+shader_parameter/noise_highlights = 0.8
+shader_parameter/enable_halation = false
+shader_parameter/halation_amount = 0.3
+shader_parameter/halation_threshold = 0.8
+shader_parameter/halation_size = 2.0
+shader_parameter/halation_color_filter = Vector3(1, 0.9, 0.8)
+shader_parameter/enable_sharpen = false
+shader_parameter/sharpen_intensity = 1.0
+shader_parameter/sharpen_offset = 1.0
+shader_parameter/enable_soften = false
+shader_parameter/soften_strength = 1.0
+shader_parameter/soften_blend = 0.5
+shader_parameter/enable_vignette = true
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_size = 0.8
+shader_parameter/vignette_color = Vector3(0, 0, 0)
+
 [node name="Game" type="Node2D"]
+material = SubResource("ShaderMaterial_gee14")
 script = ExtResource("1_uwrxv")
 
 [node name="Doors" type="Node2D" parent="."]
@@ -302,4 +371,52 @@ position = Vector2(1587, 929)
 
 [node name="Hallway" type="Node2D" parent="Chests"]
 
+[node name="Pills" type="Node2D" parent="."]
+
+[node name="Pill" parent="Pills" instance=ExtResource("5_iywne")]
+position = Vector2(1044, 848)
+
+[node name="Pill2" parent="Pills" instance=ExtResource("5_iywne")]
+position = Vector2(1312, 888)
+on_table = true
+
+[node name="Desaturate" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="DesaturateRect" type="ColorRect" parent="Desaturate"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_0tnpc")
+offset_right = 1440.0
+offset_bottom = 1080.0
+
+[node name="CRT" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("6_u5sy4")
+
+[node name="ShaderRect" type="ColorRect" parent="CRT"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_u5sy4")
+offset_right = 1440.0
+offset_bottom = 1080.0
+
+[node name="BlackOverlay" type="ColorRect" parent="CRT"]
+unique_name_in_owner = true
+offset_right = 1440.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.392157)
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="PillTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+
+[connection signal="pill_used" from="." to="Player" method="_on_pill_used"]
+[connection signal="pill_used" from="." to="CRT" method="_on_game_pill_used"]
+[connection signal="pill_wore_off" from="." to="Player" method="_on_pill_wore_off"]
+[connection signal="pill_wore_off" from="." to="CRT" method="_on_game_pill_wore_off"]
 [connection signal="chest_opened" from="Chests/Normal/Chest" to="." method="_on_chest_opened"]
+[connection signal="picked_up_pill" from="Pills/Pill" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Pills/Pill2" to="." method="_on_pill_picked_up"]
+[connection signal="timeout" from="Timers/PillTimer" to="." method="_on_pill_timer_timeout"]

@@ -1,0 +1,104 @@
+[gd_scene load_steps=10 format=3 uid="uid://bapm6iyiqj0om"]
+
+[ext_resource type="Script" uid="uid://dh0aks58hg16x" path="res://scripts/pill.gd" id="1_nnkvg"]
+[ext_resource type="Texture2D" uid="uid://bmu4lfehnnpol" path="res://assets/aseprite/pill.png" id="2_camkv"]
+[ext_resource type="Shader" uid="uid://di2u13pcqblhq" path="res://addons/asset-library-2D-outline-shader-4-b41ecb704f260c3f04b35b19837ace0f89cb092d/outline.gdshader" id="3_camkv"]
+[ext_resource type="Texture2D" uid="uid://clmeh2gybg7ix" path="res://assets/aseprite/pill_shadow.png" id="4_m854c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m854c"]
+shader = ExtResource("3_camkv")
+shader_parameter/color = Color(0.0509804, 1, 0, 0.333333)
+shader_parameter/width = 4.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+
+[sub_resource type="Animation" id="Animation_camkv"]
+resource_name = "swing"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 5), Vector2(0, -5)]
+}
+
+[sub_resource type="Animation" id="Animation_m854c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m854c"]
+_data = {
+&"RESET": SubResource("Animation_m854c"),
+&"swing": SubResource("Animation_camkv")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_camkv"]
+radius = 75.0067
+
+[node name="Pill" type="Node2D"]
+script = ExtResource("1_nnkvg")
+
+[node name="PillShadow" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 59)
+scale = Vector2(3, 3)
+texture = ExtResource("4_m854c")
+
+[node name="PillShadowTable" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 30)
+scale = Vector2(3, 3)
+texture = ExtResource("4_m854c")
+
+[node name="Sprites" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(0, 5)
+
+[node name="Sprite" type="Sprite2D" parent="Sprites"]
+unique_name_in_owner = true
+scale = Vector2(3, 3)
+texture = ExtResource("2_camkv")
+
+[node name="SpriteShader" type="Sprite2D" parent="Sprites"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_m854c")
+scale = Vector2(3, 3)
+texture = ExtResource("2_camkv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_m854c")
+}
+autoplay = "swing"
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+visible = false
+shape = SubResource("CircleShape2D_camkv")
+
+[connection signal="body_entered" from="PickupArea" to="." method="_on_pickup_area_body_entered"]
+[connection signal="body_exited" from="PickupArea" to="." method="_on_pickup_area_body_exited"]

@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-const MAX_SPEED := 300.0
-const ACCELERATION := MAX_SPEED / 0.15
-const FRICTION := ACCELERATION
+var MAX_SPEED := 250.0
+var ACCELERATION := MAX_SPEED / 0.15
+var FRICTION := ACCELERATION
 
 var health := 5
 var last_direction := Vector2.ZERO
@@ -59,3 +59,11 @@ func play_open_chest_animation() -> void:
 	
 	await anim.animation_finished
 	is_playing_open_anim = false
+
+
+func _on_pill_used() -> void:
+	MAX_SPEED = 300.0
+
+
+func _on_pill_wore_off() -> void:
+	MAX_SPEED = 250.0

@@ -1,3 +1,8 @@
+## Godot shaders
+
+- crt: https://godotshaders.com/shader/crt-video-like-shader/
+- desaturation: https://godotshaders.com/shader/desaturation-shader/
+
 ## Assets used
 
 - house: https://tilation.itch.io/16x16-small-indoor-tileset

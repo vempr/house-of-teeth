@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8juqjb1gl6xj"
-path="res://.godot/imported/jumpscare-Sheet.png-8a63f06a0877b3c8ff46cfc00273134c.ctex"
+uid="uid://rjekdiajjoed"
+path="res://.godot/imported/tooth.png-7b737631fe16a0582601f14c64a1e278.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/jumpscare/jumpscare-Sheet.png"
-dest_files=["res://.godot/imported/jumpscare-Sheet.png-8a63f06a0877b3c8ff46cfc00273134c.ctex"]
+source_file="res://assets/aseprite/tooth.png"
+dest_files=["res://.godot/imported/tooth.png-7b737631fe16a0582601f14c64a1e278.ctex"]
 
 [params]
 
