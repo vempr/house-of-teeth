@@ -8,9 +8,13 @@ var health := 5
 var last_direction := Vector2.ZERO
 var current_velocity := Vector2.ZERO
 @onready var anim := %AnimatedSprite
+var is_playing_open_anim := false
 
 
 func _physics_process(delta: float) -> void:
+	if is_playing_open_anim:
+		return
+	
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction != Vector2.ZERO:
 		last_direction = direction
@@ -23,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	velocity = current_velocity
 	move_and_slide()
 	
-	if velocity == Vector2.ZERO:
+	if direction == Vector2.ZERO:
 		if abs(last_direction.x) >= abs(last_direction.y):
 			anim.play("idle_right")
 			anim.flip_h = last_direction.x < 0
@@ -40,3 +44,18 @@ func _physics_process(delta: float) -> void:
 		else:
 			anim.play("walk_right")
 			anim.flip_h = direction.x < 0
+
+
+func play_open_chest_animation() -> void:
+	is_playing_open_anim = true
+	
+	if last_direction.y < 0 && last_direction.x == 0:
+		anim.play("open_up")
+	elif last_direction.y > 0 && last_direction.x == 0:
+		anim.play("open_down")
+	else:
+		anim.play("open_right")
+		anim.flip_h = last_direction.x < 0
+	
+	await anim.animation_finished
+	is_playing_open_anim = false

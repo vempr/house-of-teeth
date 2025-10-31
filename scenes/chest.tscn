@@ -1,0 +1,118 @@
+[gd_scene load_steps=12 format=3 uid="uid://cq17o4x3ewrfe"]
+
+[ext_resource type="Texture2D" uid="uid://c7ck1oe8vov4d" path="res://assets/house/4 BigSet.png" id="1_oii8l"]
+[ext_resource type="Script" uid="uid://blvxagxcbb8v6" path="res://scripts/chest.gd" id="1_sy5e1"]
+[ext_resource type="Texture2D" uid="uid://rjekdiajjoed" path="res://assets/tooth/tooth.png" id="3_gqd3d"]
+[ext_resource type="Shader" uid="uid://di2u13pcqblhq" path="res://addons/asset-library-2D-outline-shader-4-b41ecb704f260c3f04b35b19837ace0f89cb092d/outline.gdshader" id="3_yue2o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yue2o"]
+shader = ExtResource("3_yue2o")
+shader_parameter/color = Color(0.0500001, 1, 0, 0.333333)
+shader_parameter/width = 3.0
+shader_parameter/pattern = 2
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yhylo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oii8l"]
+size = Vector2(24, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sy5e1"]
+size = Vector2(14, 8)
+
+[sub_resource type="Animation" id="Animation_gqd3d"]
+resource_name = "tooth"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.25, -5), Vector2(0.25, -12.25)]
+}
+
+[sub_resource type="Animation" id="Animation_yue2o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, -5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yhylo"]
+_data = {
+&"RESET": SubResource("Animation_yue2o"),
+&"tooth": SubResource("Animation_gqd3d")
+}
+
+[node name="Chest" type="StaticBody2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_sy5e1")
+
+[node name="ClosedSpriteShader" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_yue2o")
+position = Vector2(0.5, 0.75)
+scale = Vector2(0.78, 0.78)
+texture = ExtResource("1_oii8l")
+region_enabled = true
+region_rect = Rect2(108.214, 381.802, 18.8535, 16.2784)
+
+[node name="ClosedSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_oii8l")
+region_enabled = true
+region_rect = Rect2(112.399, 385.628, 14.6684, 12.4529)
+
+[node name="OpenSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_yhylo")
+texture = ExtResource("1_oii8l")
+region_enabled = true
+region_rect = Rect2(0.921641, 399.94, 14.1287, 14.1474)
+
+[node name="OpenArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenArea"]
+visible = false
+shape = SubResource("RectangleShape2D_oii8l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_sy5e1")
+
+[node name="Tooth" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 5
+position = Vector2(0.25, -5)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_gqd3d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tooth"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_yhylo")
+}
+
+[connection signal="body_entered" from="OpenArea" to="." method="_on_open_area_body_entered"]
+[connection signal="body_exited" from="OpenArea" to="." method="_on_open_area_body_exited"]
+[connection signal="animation_finished" from="Tooth/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

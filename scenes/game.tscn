@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://dxfu854duwa3o"]
+[gd_scene load_steps=7 format=4 uid="uid://dxfu854duwa3o"]
 
 [ext_resource type="Script" uid="uid://cmne6wlc863bf" path="res://scripts/game.gd" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c7ck1oe8vov4d" path="res://assets/house/4 BigSet.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://miuv0twkkost" path="res://scenes/player.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://cq17o4x3ewrfe" path="res://scenes/chest.tscn" id="4_lbhrr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -288,4 +289,17 @@ tile_map_data = PackedByteArray("AAAaABgAAAAGABgAAAAKAA4AAAAEABgAAAANAA4AAAAEABg
 tile_set = SubResource("TileSet_uwrxv")
 
 [node name="Player" parent="." instance=ExtResource("3_lnu2h")]
+unique_name_in_owner = true
+z_index = 1
 position = Vector2(693, 370)
+
+[node name="Chests" type="Node2D" parent="."]
+
+[node name="Normal" type="Node2D" parent="Chests"]
+
+[node name="Chest" parent="Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1587, 929)
+
+[node name="Hallway" type="Node2D" parent="Chests"]
+
+[connection signal="chest_opened" from="Chests/Normal/Chest" to="." method="_on_chest_opened"]
