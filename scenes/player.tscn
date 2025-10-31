@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://miuv0twkkost"]
+[gd_scene load_steps=89 format=3 uid="uid://miuv0twkkost"]
 
 [ext_resource type="Script" uid="uid://cdjhyb4dbgip6" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://cfuntbfqmun3u" path="res://assets/character/idle.png" id="2_g2els"]
@@ -456,7 +456,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle_down",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -473,7 +473,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle_right",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -490,7 +490,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle_up",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -635,6 +635,12 @@ animations = [{
 radius = 17.0
 height = 52.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tuyoq"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjrip"]
+bg_color = Color(0.886262, 0.886261, 0.886262, 1)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_3vyb7")
@@ -643,12 +649,26 @@ script = ExtResource("1_3vyb7")
 unique_name_in_owner = true
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_fjrip")
-animation = &"hurt_down"
+animation = &"idle_up"
 autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-2, 0)
 shape = SubResource("CapsuleShape2D_qlg0r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -20.0
+offset_top = -46.0
+offset_right = 20.0
+offset_bottom = -37.0
+theme_override_styles/background = SubResource("StyleBoxFlat_tuyoq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fjrip")
+max_value = 5.0
+step = 1.0
+value = 3.0
+show_percentage = false

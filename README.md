@@ -5,6 +5,7 @@
 
 ## Assets used
 
+- font: https://www.dafont.com/pixel-bug.font
 - house: https://tilation.itch.io/16x16-small-indoor-tileset
 - character: https://otterisk.itch.io/hana-caraka-base-character
 - monster: https://penusbmic.itch.io/monster-pack-i

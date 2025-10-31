@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkdekqe5tujfx"]
+
+[ext_resource type="Script" uid="uid://cnvbvu1th7j77" path="res://scripts/hud.gd" id="1_6fi6k"]
+[ext_resource type="Texture2D" uid="uid://bmu4lfehnnpol" path="res://assets/aseprite/pill.png" id="1_oo0fn"]
+[ext_resource type="Texture2D" uid="uid://rjekdiajjoed" path="res://assets/aseprite/tooth.png" id="2_5ysmq"]
+[ext_resource type="FontFile" uid="uid://dy3sux6dvtf8f" path="res://assets/font/Pixel Bug.otf" id="3_5ysmq"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_6fi6k")
+
+[node name="Pill" type="Sprite2D" parent="."]
+position = Vector2(89, 1006)
+scale = Vector2(7, 7)
+texture = ExtResource("1_oo0fn")
+
+[node name="Tooth" type="Sprite2D" parent="."]
+position = Vector2(1362, 1004)
+scale = Vector2(3, 3)
+texture = ExtResource("2_5ysmq")
+
+[node name="Pills" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 173.0
+offset_top = 971.0
+offset_right = 458.0
+offset_bottom = 1107.0
+theme_override_fonts/font = ExtResource("3_5ysmq")
+theme_override_font_sizes/font_size = 100
+text = "0"
+
+[node name="Teeth" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 1172.0
+offset_top = 912.0
+offset_right = 1545.0
+offset_bottom = 1048.0
+theme_override_fonts/font = ExtResource("3_5ysmq")
+theme_override_font_sizes/font_size = 40
+text = "0/20"
+horizontal_alignment = 1

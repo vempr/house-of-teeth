@@ -4,6 +4,7 @@ const PILL_SATURATION := 0.1
 
 
 func _on_game_pill_used() -> void:
+	%Monsters.visible = true
 	%ShaderRect.material.set_shader_parameter("enable_compression", true)
 	%BlackOverlay.visible = false
 	
@@ -15,6 +16,7 @@ func _on_game_pill_used() -> void:
 
 
 func _on_game_pill_wore_off() -> void:
+	%Monsters.visible = false
 	%ShaderRect.material.set_shader_parameter("enable_compression", false)
 	%BlackOverlay.visible = true
 	

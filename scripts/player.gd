@@ -9,10 +9,15 @@ var current_velocity := Vector2.ZERO
 @onready var anim := %AnimatedSprite
 var is_playing_open_anim := false
 var is_playing_hurt_anim := false
+var is_dead := false
+
+
+func _ready() -> void:
+	%HealthBar.value = 5.0
 
 
 func _physics_process(delta: float) -> void:
-	if is_playing_open_anim:
+	if is_playing_open_anim || is_dead:
 		return
 	
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -73,6 +78,24 @@ func _on_pill_wore_off() -> void:
 
 
 func _on_monster_player_attacked() -> void:
+	if is_dead:
+		return
+	
+	%HealthBar.value -= 1.0
+	if %HealthBar.value <= 0.0:
+		%HealthBar.visible = false
+		is_dead = true
+		
+		if last_direction.y < 0 && last_direction.x == 0:
+			anim.play("die_up")
+		elif last_direction.y > 0 && last_direction.x == 0:
+			anim.play("die_down")
+		else:
+			anim.play("die_right")
+			anim.flip_h = last_direction.x < 0
+		
+		return
+	
 	is_playing_hurt_anim = true
 	
 	if last_direction.y < 0 && last_direction.x == 0:

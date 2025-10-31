@@ -2,6 +2,8 @@ extends Node2D
 
 signal pill_used
 signal pill_wore_off
+signal update_hud(teeth: int, pills: int)
+
 
 var game_state := {
 	"health": 5,
@@ -11,12 +13,13 @@ var game_state := {
 
 
 func _ready() -> void:
-	pass
+	%Monsters.visible = false
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("use_pill") && game_state.pills > 0:
+	if Input.is_action_just_pressed("use_pill") && game_state.pills > 0 && game_state.health > 0:
 		game_state.pills -= 1
+		update_hud.emit(game_state.teeth, game_state.pills)
 		pill_used.emit()
 		%PillTimer.start()
 
@@ -24,10 +27,12 @@ func _process(_delta: float) -> void:
 func _on_chest_opened(has_tooth: bool) -> void:
 	if has_tooth:
 		game_state.teeth += 1
+		update_hud.emit(game_state.teeth, game_state.pills)
 
 
 func _on_pill_picked_up() -> void:
 	game_state.pills += 1
+	update_hud.emit(game_state.teeth, game_state.pills)
 
 
 func _on_pill_timer_timeout() -> void:
@@ -35,7 +40,13 @@ func _on_pill_timer_timeout() -> void:
 
 
 func _on_monster_player_attacked() -> void:
+	if game_state.health == 0:
+		return
+	
 	game_state.health -= 1
+	if game_state.health == 0:
+		pill_used.emit() # reveal monster(s) that player died to
+		return
 	
 	var new_sat = %DesaturateRect.material.get_shader_parameter("saturation") - 0.1
 	if new_sat < 0.0:

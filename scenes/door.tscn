@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk08oh85hmylx"]
+
+[ext_resource type="Texture2D" uid="uid://c7ck1oe8vov4d" path="res://assets/house/4 BigSet.png" id="1_hpvv5"]
+[ext_resource type="Script" uid="uid://17u4q6k8xuoa" path="res://scripts/door.gd" id="1_uvdjg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpvv5"]
+size = Vector2(64, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvdjg"]
+size = Vector2(64, 108)
+
+[node name="Door" type="StaticBody2D"]
+script = ExtResource("1_uvdjg")
+
+[node name="Rounded" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="ClosedRoundedSprite" type="Sprite2D" parent="Rounded"]
+unique_name_in_owner = true
+scale = Vector2(4.2, 4.2)
+texture = ExtResource("1_hpvv5")
+region_enabled = true
+region_rect = Rect2(63.984, 352.009, 16, 16)
+
+[node name="OpenRoundedSprite" type="Sprite2D" parent="Rounded"]
+unique_name_in_owner = true
+visible = false
+scale = Vector2(4.2, 4.2)
+texture = ExtResource("1_hpvv5")
+region_enabled = true
+region_rect = Rect2(79.984, 352.029, 16, 16)
+
+[node name="Square" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="ClosedSquareSprite" type="Sprite2D" parent="Square"]
+unique_name_in_owner = true
+scale = Vector2(4.2, 4.2)
+texture = ExtResource("1_hpvv5")
+region_enabled = true
+region_rect = Rect2(31.941, 352.029, 16, 16)
+
+[node name="OpenSquareSprite" type="Sprite2D" parent="Square"]
+unique_name_in_owner = true
+visible = false
+scale = Vector2(4.2, 4.2)
+texture = ExtResource("1_hpvv5")
+region_enabled = true
+region_rect = Rect2(47.941, 352.029, 16, 16)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_hpvv5")
+
+[node name="OpenableArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpenableArea"]
+visible = false
+shape = SubResource("RectangleShape2D_uvdjg")
+
+[connection signal="body_entered" from="OpenableArea" to="." method="_on_openable_area_body_entered"]
+[connection signal="body_exited" from="OpenableArea" to="." method="_on_openable_area_body_exited"]

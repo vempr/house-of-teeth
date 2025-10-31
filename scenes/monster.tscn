@@ -111,6 +111,7 @@ animations = [{
 size = Vector2(216, 178)
 
 [node name="Monster" type="Node2D"]
+z_index = 1
 script = ExtResource("1_1cbnp")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
