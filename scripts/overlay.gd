@@ -12,10 +12,6 @@ func _on_game_pill_used() -> void:
 	if new_sat < 0.0:
 		new_sat = 0.0
 	%DesaturateRect.material.set_shader_parameter("saturation", new_sat)
-	
-	%BlackOverlay.modulate.a = 0.0
-	var tween = create_tween()
-	tween.parallel().tween_property(%BlackOverlay, "modulate:a", 1.0, 10.0)
 
 
 func _on_game_pill_wore_off() -> void:

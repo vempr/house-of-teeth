@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
-var MAX_SPEED := 250.0
+const NORMAL_SPEED := 250.0
+const PILLED_SPEED := 300.0
+
+var MAX_SPEED := NORMAL_SPEED
 var ACCELERATION := MAX_SPEED / 0.15
 var FRICTION := ACCELERATION
 
@@ -45,13 +48,22 @@ func _physics_process(delta: float) -> void:
 			else:
 				anim.play("idle_down")
 	else:
-		if direction.y < 0 && direction.x == 0:
-			anim.play("walk_up")
-		elif direction.y > 0 && direction.x == 0:
-			anim.play("walk_down")
+		if MAX_SPEED == NORMAL_SPEED:
+			if direction.y < 0 && direction.x == 0:
+				anim.play("walk_up")
+			elif direction.y > 0 && direction.x == 0:
+				anim.play("walk_down")
+			else:
+				anim.play("walk_right")
+				anim.flip_h = direction.x < 0
 		else:
-			anim.play("walk_right")
-			anim.flip_h = direction.x < 0
+			if direction.y < 0 && direction.x == 0:
+				anim.play("run_up")
+			elif direction.y > 0 && direction.x == 0:
+				anim.play("run_down")
+			else:
+				anim.play("run_right")
+				anim.flip_h = direction.x < 0
 
 
 func play_open_chest_animation() -> void:
@@ -70,11 +82,11 @@ func play_open_chest_animation() -> void:
 
 
 func _on_pill_used() -> void:
-	MAX_SPEED = 300.0
+	MAX_SPEED = PILLED_SPEED
 
 
 func _on_pill_wore_off() -> void:
-	MAX_SPEED = 250.0
+	MAX_SPEED = NORMAL_SPEED
 
 
 func _on_monster_player_attacked() -> void:

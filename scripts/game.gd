@@ -15,6 +15,7 @@ var game_state := {
 
 func _ready() -> void:
 	%Monsters.visible = false
+	%CRT.visible = true
 
 
 func _process(_delta: float) -> void:
@@ -44,9 +45,7 @@ func _on_monster_player_attacked() -> void:
 	if game_state.health == 0:
 		return
 	
-	%BlackOverlay.modulate.a = 0.0
-	var tween = create_tween()
-	tween.parallel().tween_property(%BlackOverlay, "modulate:a", 1.0, 0.4)
+	flash()
 	
 	game_state.health -= 1
 	if game_state.health == 0:
@@ -59,3 +58,9 @@ func _on_monster_player_attacked() -> void:
 	if new_sat < 0.0:
 		new_sat = 0.0
 	%DesaturateRect.material.set_shader_parameter("saturation", new_sat)
+
+
+func flash() -> void:
+	%BlackOverlay.modulate.a = 0.0
+	var tween = create_tween()
+	tween.parallel().tween_property(%BlackOverlay, "modulate:a", 1.0, 0.4)
