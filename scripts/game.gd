@@ -3,6 +3,7 @@ extends Node2D
 signal pill_used
 signal pill_wore_off
 signal update_hud(teeth: int, pills: int)
+signal player_died
 
 
 var game_state := {
@@ -43,9 +44,15 @@ func _on_monster_player_attacked() -> void:
 	if game_state.health == 0:
 		return
 	
+	%BlackOverlay.modulate.a = 0.0
+	var tween = create_tween()
+	tween.parallel().tween_property(%BlackOverlay, "modulate:a", 1.0, 0.4)
+	
 	game_state.health -= 1
 	if game_state.health == 0:
 		pill_used.emit() # reveal monster(s) that player died to
+		%Monsters.process_mode = Node.PROCESS_MODE_DISABLED
+		player_died.emit()
 		return
 	
 	var new_sat = %DesaturateRect.material.get_shader_parameter("saturation") - 0.1

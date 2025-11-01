@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=4 uid="uid://dxfu854duwa3o"]
+[gd_scene load_steps=18 format=4 uid="uid://dxfu854duwa3o"]
 
 [ext_resource type="Script" uid="uid://cmne6wlc863bf" path="res://scripts/game.gd" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c7ck1oe8vov4d" path="res://assets/house/4 BigSet.png" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://7jre5k5tbo8n" path="res://scenes/jumpscare.tscn" id="3_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bkdekqe5tujfx" path="res://scenes/hud.tscn" id="3_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://miuv0twkkost" path="res://scenes/player.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cq17o4x3ewrfe" path="res://scenes/chest.tscn" id="4_lbhrr"]
@@ -334,10 +335,14 @@ sources/0 = SubResource("TileSetAtlasSource_lnu2h")
 material = SubResource("ShaderMaterial_gee14")
 script = ExtResource("1_uwrxv")
 
+[node name="Jumpscare" parent="." instance=ExtResource("3_dinhu")]
+visible = false
+
 [node name="HUD" parent="." instance=ExtResource("3_kvpfn")]
 unique_name_in_owner = true
 
 [node name="Desaturate" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
 [node name="DesaturateRect" type="ColorRect" parent="Desaturate"]
 unique_name_in_owner = true
@@ -433,10 +438,15 @@ unique_name_in_owner = true
 [node name="Monster" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
 position = Vector2(1927, -125)
 
+[node name="Monster2" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(1927, 151)
+plane = 1
+
 [connection signal="pill_used" from="." to="CRT" method="_on_game_pill_used"]
 [connection signal="pill_used" from="." to="Player" method="_on_pill_used"]
 [connection signal="pill_wore_off" from="." to="CRT" method="_on_game_pill_wore_off"]
 [connection signal="pill_wore_off" from="." to="Player" method="_on_pill_wore_off"]
+[connection signal="player_died" from="." to="Jumpscare" method="_on_game_player_died"]
 [connection signal="update_hud" from="." to="HUD" method="_on_game_update_hud"]
 [connection signal="timeout" from="Timers/PillTimer" to="." method="_on_pill_timer_timeout"]
 [connection signal="chest_opened" from="Objects/Chests/Normal/Chest" to="." method="_on_chest_opened"]
@@ -444,3 +454,5 @@ position = Vector2(1927, -125)
 [connection signal="picked_up_pill" from="Objects/Pills/Pill2" to="." method="_on_pill_picked_up"]
 [connection signal="player_attacked" from="Objects/Monsters/Monster" to="." method="_on_monster_player_attacked"]
 [connection signal="player_attacked" from="Objects/Monsters/Monster" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster2" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster2" to="Player" method="_on_monster_player_attacked"]
