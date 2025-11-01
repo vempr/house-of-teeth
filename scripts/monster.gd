@@ -1,6 +1,6 @@
 extends Node2D
 
-enum PLANE { HORIZONTAL, VERTICAL }
+enum PLANE { HORIZONTAL, VERTICAL, DIAGONAL }
 
 signal player_attacked
 
@@ -22,6 +22,8 @@ func _ready() -> void:
 				direction.y = 1
 			else:
 				direction.y = -1
+		PLANE.DIAGONAL:
+			direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 
 
 func _physics_process(delta: float) -> void:
@@ -43,6 +45,21 @@ func _physics_process(delta: float) -> void:
 				direction.y = -1
 			elif direction.y < 0 && %RayCastUp.is_colliding():
 				direction.y = 1
+		
+		PLANE.DIAGONAL:
+			position += direction * speed * delta
+			
+			if direction.x > 0 && %RayCastRight.is_colliding():
+				direction.x = -abs(direction.x)
+				%AnimatedSprite.flip_h = true
+			elif direction.x < 0 && %RayCastLeft.is_colliding():
+				direction.x = abs(direction.x)
+				%AnimatedSprite.flip_h = false
+			
+			if direction.y > 0 && %RayCastDown.is_colliding():
+				direction.y = -abs(direction.y)
+			elif direction.y < 0 && %RayCastUp.is_colliding():
+				direction.y = abs(direction.y)
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
