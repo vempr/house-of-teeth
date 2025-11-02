@@ -1,11 +1,14 @@
-[gd_scene load_steps=27 format=4 uid="uid://dxfu854duwa3o"]
+[gd_scene load_steps=30 format=4 uid="uid://dxfu854duwa3o"]
 
 [ext_resource type="Script" uid="uid://cmne6wlc863bf" path="res://scripts/game.gd" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c7ck1oe8vov4d" path="res://assets/house/4 BigSet.png" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bkhddelw6cfto" path="res://scenes/mm_canvas_layer.tscn" id="3_5newe"]
+[ext_resource type="Script" uid="uid://c6y10wr1kbbpr" path="res://scripts/main_menu.gd" id="3_37s47"]
 [ext_resource type="PackedScene" uid="uid://7jre5k5tbo8n" path="res://scenes/jumpscare.tscn" id="3_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bkdekqe5tujfx" path="res://scenes/hud.tscn" id="3_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://miuv0twkkost" path="res://scenes/player.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cq17o4x3ewrfe" path="res://scenes/chest.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://cl11st8cxdsq3" path="res://scenes/pause_menu.tscn" id="5_bt5mj"]
 [ext_resource type="PackedScene" uid="uid://bapm6iyiqj0om" path="res://scenes/pill.tscn" id="5_iywne"]
 [ext_resource type="Shader" uid="uid://bku1ttlbl4krw" path="res://shaders/crt.gdshader" id="6_p57ef"]
 [ext_resource type="Script" uid="uid://doxn6tui2je14" path="res://scripts/overlay.gd" id="6_u5sy4"]
@@ -347,8 +350,22 @@ sources/0 = SubResource("TileSetAtlasSource_lnu2h")
 size = Vector2(100, 100)
 
 [node name="Game" type="Node2D"]
+process_mode = 1
 material = SubResource("ShaderMaterial_gee14")
 script = ExtResource("1_uwrxv")
+
+[node name="MainMenu" type="Node2D" parent="."]
+script = ExtResource("3_37s47")
+
+[node name="MainMenuCamera" type="Camera2D" parent="MainMenu"]
+unique_name_in_owner = true
+position = Vector2(2246, 1676)
+zoom = Vector2(0.5, 0.5)
+
+[node name="MMCanvasLayer" parent="MainMenu" instance=ExtResource("3_5newe")]
+layer = 5
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_bt5mj")]
 
 [node name="Jumpscare" parent="." instance=ExtResource("3_dinhu")]
 visible = false
@@ -420,7 +437,7 @@ tile_set = SubResource("TileSet_uwrxv")
 [node name="Player" parent="." instance=ExtResource("3_lnu2h")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(614, 362)
+position = Vector2(583, 338)
 
 [node name="Objects" type="Node2D" parent="."]
 
@@ -1160,14 +1177,25 @@ collision_mask = 3
 position = Vector2(1153, 3073)
 shape = SubResource("RectangleShape2D_kvuet")
 
+[node name="WinArea" type="Area2D" parent="Areas"]
+collision_mask = 3
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Areas/WinArea"]
+position = Vector2(1153, 3704)
+shape = SubResource("RectangleShape2D_kvuet")
+
 [connection signal="pill_used" from="." to="CRT" method="_on_game_pill_used"]
 [connection signal="pill_used" from="." to="Player" method="_on_pill_used"]
 [connection signal="pill_wore_off" from="." to="CRT" method="_on_game_pill_wore_off"]
 [connection signal="pill_wore_off" from="." to="Player" method="_on_pill_wore_off"]
+[connection signal="player_died" from="." to="PauseMenu" method="_on_game_player_died"]
 [connection signal="player_died" from="." to="Jumpscare" method="_on_game_player_died"]
 [connection signal="player_won" from="." to="Objects/Monsters" method="_on_game_player_won"]
 [connection signal="player_won" from="." to="Objects/OfferingTeeth" method="_on_game_player_won"]
 [connection signal="update_hud" from="." to="HUD" method="_on_game_update_hud"]
+[connection signal="start_game" from="MainMenu/MMCanvasLayer" to="MainMenu" method="_on_mm_canvas_layer_start_game"]
+[connection signal="start_game" from="MainMenu/MMCanvasLayer" to="PauseMenu" method="_on_mm_canvas_layer_start_game"]
+[connection signal="start_game" from="MainMenu/MMCanvasLayer" to="Player" method="_on_mm_canvas_layer_start_game"]
 [connection signal="timeout" from="Timers/PillTimer" to="." method="_on_pill_timer_timeout"]
 [connection signal="timeout" from="Timers/OfferingTeethTimer" to="Objects/OfferingTeeth" method="_on_offering_teeth_timer_timeout"]
 [connection signal="rand_chest_spawned" from="Objects/Chests" to="Objects/Monsters" method="_on_chests_rand_chest_spawned"]
@@ -1359,3 +1387,4 @@ shape = SubResource("RectangleShape2D_kvuet")
 [connection signal="offer" from="Areas" to="HUD" method="_on_areas_offer"]
 [connection signal="body_entered" from="Areas/OfferingArea" to="Areas" method="_on_offering_area_body_entered"]
 [connection signal="body_exited" from="Areas/OfferingArea" to="Areas" method="_on_offering_area_body_exited"]
+[connection signal="body_entered" from="Areas/WinArea" to="." method="_on_win_area_body_entered"]

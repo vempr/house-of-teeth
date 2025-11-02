@@ -13,6 +13,7 @@ var current_velocity := Vector2.ZERO
 var is_playing_open_anim := false
 var is_playing_hurt_anim := false
 var is_dead := false
+var can_move := false
 
 
 func _ready() -> void:
@@ -20,7 +21,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if is_dead:
+	if is_dead || !can_move:
 		return
 	
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -128,3 +129,7 @@ func _on_monster_player_attacked() -> void:
 	
 	await anim.animation_finished
 	is_playing_hurt_anim = false
+
+
+func _on_mm_canvas_layer_start_game() -> void:
+	can_move = true

@@ -1,0 +1,137 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkhddelw6cfto"]
+
+[ext_resource type="FontFile" uid="uid://dy3sux6dvtf8f" path="res://assets/font/Pixel Bug.otf" id="1_5hsx7"]
+[ext_resource type="Script" uid="uid://u44c3d7strs4" path="res://scripts/mm_canvas_layer.gd" id="1_ud4jb"]
+[ext_resource type="Texture2D" uid="uid://rjekdiajjoed" path="res://assets/aseprite/tooth.png" id="2_fchxs"]
+[ext_resource type="StyleBox" uid="uid://dy5xj5psq2hbh" path="res://styles/play_button.tres" id="3_ekiob"]
+[ext_resource type="Texture2D" uid="uid://b6btpgeyg4jt2" path="res://assets/aseprite/scared_orph.png" id="5_fad4x"]
+
+[node name="MMCanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_ud4jb")
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -354.5
+offset_top = 51.0
+offset_right = 354.5
+offset_bottom = 187.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_5hsx7")
+theme_override_font_sizes/font_size = 100
+text = "HOUSE OF TEETH"
+metadata/_edit_use_anchors_ = true
+
+[node name="Title2" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -699.0
+offset_top = 18.0
+offset_right = -581.0
+offset_bottom = 154.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_5hsx7")
+theme_override_font_sizes/font_size = 30
+text = "@vempr"
+
+[node name="Description" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = -212.0
+offset_right = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_5hsx7")
+theme_override_font_sizes/font_size = 30
+text = "You wake up in a house that isn't supposed to exist. Can you make your offering before they consume you?"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Title4" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -163.0
+offset_top = 36.0
+offset_right = 163.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_5hsx7")
+theme_override_font_sizes/font_size = 30
+text = "Controls:
+- E to interact
+- P to use pills
+- Esc/0 to pause"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Tooth" type="Sprite2D" parent="."]
+position = Vector2(45, 956)
+rotation = 0.261799
+scale = Vector2(10, 10)
+texture = ExtResource("2_fchxs")
+
+[node name="Tooth2" type="Sprite2D" parent="."]
+position = Vector2(429, 1119)
+rotation = -0.0174533
+scale = Vector2(10, 10)
+texture = ExtResource("2_fchxs")
+
+[node name="Tooth3" type="Sprite2D" parent="."]
+position = Vector2(271, 847)
+rotation = 0.671952
+scale = Vector2(10, 10)
+texture = ExtResource("2_fchxs")
+
+[node name="Tooth4" type="Sprite2D" parent="."]
+position = Vector2(58, 699)
+rotation = -0.314159
+scale = Vector2(10, 10)
+texture = ExtResource("2_fchxs")
+
+[node name="Tooth5" type="Sprite2D" parent="."]
+position = Vector2(116, 1194)
+rotation = 0.191986
+scale = Vector2(10, 10)
+texture = ExtResource("2_fchxs")
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -202.0
+offset_top = 160.0
+offset_right = 202.0
+offset_bottom = 293.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_5hsx7")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/focus = ExtResource("3_ekiob")
+theme_override_styles/disabled_mirrored = ExtResource("3_ekiob")
+theme_override_styles/disabled = ExtResource("3_ekiob")
+theme_override_styles/hover_pressed_mirrored = ExtResource("3_ekiob")
+theme_override_styles/hover_pressed = ExtResource("3_ekiob")
+theme_override_styles/hover_mirrored = ExtResource("3_ekiob")
+theme_override_styles/hover = ExtResource("3_ekiob")
+theme_override_styles/pressed_mirrored = ExtResource("3_ekiob")
+theme_override_styles/pressed = ExtResource("3_ekiob")
+theme_override_styles/normal_mirrored = ExtResource("3_ekiob")
+theme_override_styles/normal = ExtResource("3_ekiob")
+text = "PLAY"
+
+[node name="ScaredOrph" type="Sprite2D" parent="."]
+position = Vector2(1206, 795)
+scale = Vector2(7, 7)
+texture = ExtResource("5_fad4x")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

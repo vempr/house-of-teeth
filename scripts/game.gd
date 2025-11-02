@@ -76,3 +76,11 @@ func _on_areas_actually_offer() -> void:
 	
 	game_won = true
 	player_won.emit()
+
+
+func _on_win_area_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		GLOBAL.game_won = true
+		await Fade.fade_out(5.0, Color.WHITE).finished
+		get_tree().reload_current_scene()
+		Fade.fade_in(3.0, Color.WHITE)

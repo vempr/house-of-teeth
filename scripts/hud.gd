@@ -12,6 +12,9 @@ func _ready() -> void:
 	%OfferIncomplete.visible = true
 	%OfferComplete.modulate.a = 0.0
 	%OfferIncomplete.modulate.a = 0.0
+	
+	visible = GLOBAL.start_directly
+	GLOBAL.start_directly = false
 
 
 func _on_game_update_hud(teeth: int, pills: int) -> void:
@@ -27,14 +30,14 @@ func _on_areas_offer(there: bool) -> void:
 	
 	if there:
 		if curr_t >= 32:
-			tween.tween_property(%OfferComplete, "modulate:a", 1.0, 1.0)
+			tween.tween_property(%OfferComplete, "modulate:a", 1.0, 0.5)
 		else:
-			tween.tween_property(%OfferIncomplete, "modulate:a", 1.0, 1.0)
+			tween.tween_property(%OfferIncomplete, "modulate:a", 1.0, 0.5)
 	else:
 		if curr_t >= 32:
-			tween.tween_property(%OfferComplete, "modulate:a", 0.0, 1.0)
+			tween.tween_property(%OfferComplete, "modulate:a", 0.0, 0.5)
 		else:
-			tween.tween_property(%OfferIncomplete, "modulate:a", 0.0, 1.0)
+			tween.tween_property(%OfferIncomplete, "modulate:a", 0.0, 0.5)
 
 
 func _on_areas_actually_offer() -> void:
