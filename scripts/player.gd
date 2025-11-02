@@ -20,7 +20,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if is_playing_open_anim || is_dead:
+	if is_dead:
 		return
 	
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -40,29 +40,37 @@ func _physics_process(delta: float) -> void:
 	
 	if direction == Vector2.ZERO:
 		if abs(last_direction.x) >= abs(last_direction.y):
-			anim.play("idle_right")
+			if !is_playing_open_anim:
+				anim.play("idle_right")
 			anim.flip_h = last_direction.x < 0
 		else:
-			if last_direction.y < 0:
-				anim.play("idle_up")
-			else:
-				anim.play("idle_down")
+			if !is_playing_open_anim:
+				if last_direction.y < 0:
+					anim.play("idle_up")
+				else:
+					anim.play("idle_down")
 	else:
 		if MAX_SPEED == NORMAL_SPEED:
 			if direction.y < 0 && direction.x == 0:
-				anim.play("walk_up")
+				if !is_playing_open_anim:
+					anim.play("walk_up")
 			elif direction.y > 0 && direction.x == 0:
-				anim.play("walk_down")
+				if !is_playing_open_anim:
+					anim.play("walk_down")
 			else:
-				anim.play("walk_right")
+				if !is_playing_open_anim:
+					anim.play("walk_right")
 				anim.flip_h = direction.x < 0
 		else:
 			if direction.y < 0 && direction.x == 0:
-				anim.play("run_up")
+				if !is_playing_open_anim:
+					anim.play("run_up")
 			elif direction.y > 0 && direction.x == 0:
-				anim.play("run_down")
+				if !is_playing_open_anim:
+					anim.play("run_down")
 			else:
-				anim.play("run_right")
+				if !is_playing_open_anim:
+					anim.play("run_right")
 				anim.flip_h = direction.x < 0
 
 

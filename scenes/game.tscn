@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dxfu854duwa3o"]
+[gd_scene load_steps=27 format=4 uid="uid://dxfu854duwa3o"]
 
 [ext_resource type="Script" uid="uid://cmne6wlc863bf" path="res://scripts/game.gd" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c7ck1oe8vov4d" path="res://assets/house/4 BigSet.png" id="2_yqjtg"]
@@ -13,7 +13,9 @@
 [ext_resource type="Shader" uid="uid://fgcrkyjwhmji" path="res://shaders/desaturate.gdshader" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://co3iptt2fce3t" path="res://scenes/monster.tscn" id="9_0tnpc"]
 [ext_resource type="Script" uid="uid://bvnafwkaqtcwo" path="res://scripts/exit_doors.gd" id="10_ssvqc"]
+[ext_resource type="Script" uid="uid://dy6yvrri3xqem" path="res://scripts/chests.gd" id="11_ssvqc"]
 [ext_resource type="Script" uid="uid://df7edu2072td0" path="res://scripts/monsters.gd" id="12_ir15t"]
+[ext_resource type="Script" uid="uid://g8qsux5twh4g" path="res://scripts/pills.gd" id="13_1kice"]
 [ext_resource type="PackedScene" uid="uid://cbwj328oxvhar" path="res://scenes/furnace.tscn" id="13_kvuet"]
 [ext_resource type="Script" uid="uid://b1ed1gt8iprfy" path="res://scripts/areas.gd" id="14_trtic"]
 [ext_resource type="PackedScene" uid="uid://drb5fhtrdedod" path="res://scenes/offering_tooth.tscn" id="15_ca42v"]
@@ -412,26 +414,17 @@ tile_set = SubResource("TileSet_uwrxv")
 [node name="MGTileMapLayer2" type="TileMapLayer" parent="Tiles"]
 position = Vector2(0, -27)
 scale = Vector2(4, 4)
-tile_map_data = PackedByteArray("AAAaABgAAAAGABgAAAAKAA4AAAAEABgAAAANAA4AAAAEABgAAAARAA4AAAAEABgAAAAUAA4AAAAEABgAAAARACIAAAAFABgAAAAOACQAAAAEABgAAAAlACQAAAADABgAAAAqACAAAAAGABgAAAA0AB8AAAAGABgAAAAuACEAAAAEABgAAAAwABgAAAAFABgAAAAvAB4AAAAGABgAAAAyABsAAAAEABgAAAA1ABQAAAAEABgAAAAzACMAAAAFABgAAAAUACMAAAADABgAAABKAAsAAAAFABgAAABLAAsAAAAEABgAAABPAAsAAAADABgAAABTAAsAAAADABgAAABSAAsAAAAGABgAAABOAAsAAAAEABgAAAAaAAkAAAAEABgAAABMACoAAAAFABgAAABMACsAAAAEABgAAAAaAPv/AAAEABEAAAAdAPv/AAAFABEAAAAeAPv/AAAFABEAAAAjAPv/AAAFABEAAAAkAPv/AAAFABEAAAAmAPv/AAAFABEAAAAnAPv/AAAFABEAAAAoAPv/AAAGAAUAAAAlAPv/AAAFAAUAAAAiAPv/AAAFAAUAAAAhAPv/AAAFAAUAAAAgAPv/AAAFAAUAAAAfAPv/AAAFAAUAAAAcAPv/AAAFAAUAAAAbAPv/AAAFAAUAAAAaAP7/AAAAAAAAAAAjAP//AAABAAIAAAAkAP//AAACAAIAAAAbAP7/AAABAAAAAAAcAP7/AAABAAAAAAAgAP7/AAABAAAAAAAiAP7/AAABAAAAAAAjAP7/AAABAAAAAAAbAP//AAABAAEAAAAcAP//AAABAAEAAAAeAP//AAABAAEAAAAfAP//AAABAAIAAAAgAP//AAABAA4AAAAhAP//AAABAAIAAAAiAP//AAABAAIAAAAaAP//AAAAAA0AAAAkAP7/AAACAAwAAAAdAP7/AAABAAwAAAAeAP7/AAABAAwAAAAhAP7/AAABAAwAAAAfAP7/AAABAAwAAAAdAP//AAABAA0AAAAeAAMAAAAGABEAAAAaAAMAAAAFABEAAAAZAAMAAAAEAAUAAAAbAAMAAAAFAAUAAAAcAAMAAAAFAAUAAAAdAAMAAAAFAAUAAAAeAAAAAAACAAIAAAAaAAAAAAAAAA4AAAAcAAAAAAABAA4AAAAdAAAAAAABAA4AAAAbAAAAAAABAAIAAAAvAPn/AAAAAAAAAAAvAPr/AAAAAA0AAAAvAPv/AAAAAA0AAAAwAPn/AAABAAwAAAAwAPr/AAABAA0AAAAwAPv/AAABAA0AAAAxAPn/AAACAAAAAAAxAPr/AAACAAEAAAAxAPv/AAACAA0AAAAvAPz/AAAAAAEAAAAvAP3/AAAAAAIAAAAwAPz/AAABAA0AAAAwAP3/AAABAAIAAAAxAPz/AAACAAEAAAAxAP3/AAACAA4AAAA1AP3/AAADAA4AAAA3AP3/AAACAAIAAAA1APn/AAAAAAAAAAA7APr/AAABAAAAAAA6APn/AAACAAAAAABQAPr/AAACAAwAAABQAPv/AAACAA4AAAA9APr/AAABAAwAAAA+APr/AAABAAwAAABEAPr/AAABAAwAAABFAPr/AAABAAwAAABIAPr/AAABAAEAAABJAPr/AAABAAwAAABMAPr/AAABAAwAAABHAPr/AAABAAwAAABDAPr/AAABAAwAAABPAPr/AAABAAwAAAA7APv/AAABAA4AAAA8APv/AAABAA4AAAA+APv/AAABAA4AAAA/APv/AAABAAEAAABAAPv/AAABAAEAAABBAPv/AAABAA4AAABEAPv/AAABAA4AAABJAPv/AAABAA4AAABMAPv/AAABAA4AAABOAPv/AAABAA4AAAA4APv/AAABAA4AAAA5APv/AAABAA4AAAA1APr/AAAAAA0AAAA1APv/AAAAAA0AAAA3APn/AAABAAwAAAA4APn/AAABAAwAAAA2APz/AAABAA0AAAA3APv/AAABAA0AAAA4APr/AAABAA0AAAA5APr/AAABAAEAAAA2APn/AAABAAAAAAA5APn/AAABAAAAAAA8APr/AAABAAAAAAA/APr/AAABAAAAAABAAPr/AAABAAAAAABBAPr/AAABAAAAAABCAPr/AAABAAAAAABGAPr/AAABAAAAAABKAPr/AAABAAAAAABLAPr/AAABAAAAAABNAPr/AAABAAAAAABOAPr/AAABAAAAAABPAPv/AAABAAIAAABNAPv/AAABAAIAAABLAPv/AAABAAIAAABKAPv/AAABAAIAAABIAPv/AAABAAIAAABHAPv/AAABAAIAAABGAPv/AAABAAIAAABFAPv/AAABAAIAAABDAPv/AAABAAIAAABCAPv/AAABAAIAAAA9APv/AAABAAIAAAA6APv/AAABAAIAAAA3APz/AAACAAEAAAA2AP3/AAABAAIAAAA1APz/AAAAAAEAAAA2APr/AAABAAEAAAA2APv/AAABAAEAAAA3APr/AAABAAEAAAA6APr/AAABAAEAAAA/AP7/AAAEAAUAAABLAAAAAAAAAAIAAABRAP7/AAACAAAAAABGAP//AAAAAA4AAABRAAAAAAACAAIAAABAAP7/AAABAAwAAABBAP7/AAABAAwAAABDAP7/AAABAAwAAABEAP7/AAABAAwAAABGAP7/AAABAAwAAABLAP7/AAABAAwAAABOAP7/AAABAAwAAABJAP7/AAABAAwAAABCAP7/AAABAAAAAABFAP7/AAABAAAAAABIAP7/AAABAAAAAABHAP7/AAABAAAAAABKAP7/AAABAAAAAABMAP7/AAABAAAAAABNAP7/AAABAAAAAABPAP7/AAABAAAAAABQAP7/AAABAAAAAABIAP//AAABAAEAAABLAP//AAABAAEAAABNAP//AAABAAEAAABOAP//AAABAAEAAABQAP//AAABAAEAAABMAAAAAAABAA4AAABPAAAAAAABAA4AAABHAP//AAABAA4AAABJAP//AAABAA4AAABNAAAAAAABAA4AAABOAAAAAAABAAEAAABQAAAAAAABAA4AAABRAP//AAACAA0AAABKAP//AAABAAEAAABMAP//AAABAAEAAABPAP//AAABAAEAAABLAAMAAAAAAAAAAABLAAQAAAAAAA0AAABLAAUAAAAAAAIAAABMAAMAAAABAAAAAABMAAQAAAABAA0AAABMAAUAAAABAA4AAABNAAMAAAABAAwAAABNAAQAAAABAAEAAABNAAUAAAABAAIAAABQAAMAAAABAAAAAABQAAQAAAABAA0AAABQAAUAAAABAAIAAABRAAMAAAABAAwAAABRAAQAAAABAAEAAABRAAUAAAABAAIAAABSAAMAAAACAAwAAABSAAQAAAACAA0AAABSAAUAAAACAAIAAABOAAMAAAABAAAAAABOAAQAAAABAA0AAABOAAUAAAABAA4AAABPAAMAAAABAAAAAABPAAQAAAABAA0AAABPAAUAAAABAA4AAABLAAgAAAAAAAwAAABLAAkAAAAAAA0AAABLAAoAAAAAAAIAAABMAAgAAAABAAwAAABMAAkAAAABAAEAAABMAAoAAAABAA4AAABNAAgAAAABAAAAAABNAAkAAAABAAEAAABNAAoAAAABAAIAAABQAAgAAAACAAwAAABQAAkAAAACAA0AAABQAAoAAAACAA4AAABRAAgAAAABAAAAAABRAAkAAAABAAEAAABRAAoAAAABAAIAAABSAAgAAAACAAwAAABSAAkAAAACAAEAAABSAAoAAAACAA4AAABOAAgAAAABAAAAAABOAAkAAAABAAEAAABOAAoAAAABAAIAAABPAAgAAAABAAwAAABPAAkAAAABAAEAAABPAAoAAAABAA4AAAA=")
+tile_map_data = PackedByteArray("AAAaABgAAAAGABgAAAAKAA4AAAAEABgAAAANAA4AAAAEABgAAAARAA4AAAAEABgAAAAUAA4AAAAEABgAAAARACIAAAAFABgAAAAOACQAAAAEABgAAAAlACQAAAADABgAAAAqACAAAAAGABgAAAA0AB8AAAAGABgAAAAuACEAAAAEABgAAAAwABgAAAAFABgAAAAvAB4AAAAGABgAAAAyABsAAAAEABgAAAA1ABQAAAAEABgAAAAzACMAAAAFABgAAAAUACMAAAADABgAAABKAAsAAAAFABgAAABLAAsAAAAEABgAAABPAAsAAAADABgAAABTAAsAAAADABgAAABSAAsAAAAGABgAAABOAAsAAAAEABgAAAAaAAkAAAAEABgAAABMACoAAAAFABgAAABMACsAAAAEABgAAAAaAPv/AAAEABEAAAAdAPv/AAAFABEAAAAeAPv/AAAFABEAAAAjAPv/AAAFABEAAAAkAPv/AAAFABEAAAAmAPv/AAAFABEAAAAnAPv/AAAFABEAAAAoAPv/AAAGAAUAAAAlAPv/AAAFAAUAAAAiAPv/AAAFAAUAAAAhAPv/AAAFAAUAAAAgAPv/AAAFAAUAAAAfAPv/AAAFAAUAAAAcAPv/AAAFAAUAAAAbAPv/AAAFAAUAAAAaAP7/AAAAAAAAAAAjAP//AAABAAIAAAAkAP//AAACAAIAAAAbAP7/AAABAAAAAAAcAP7/AAABAAAAAAAgAP7/AAABAAAAAAAiAP7/AAABAAAAAAAjAP7/AAABAAAAAAAbAP//AAABAAEAAAAcAP//AAABAAEAAAAeAP//AAABAAEAAAAfAP//AAABAAIAAAAgAP//AAABAA4AAAAhAP//AAABAAIAAAAiAP//AAABAAIAAAAaAP//AAAAAA0AAAAkAP7/AAACAAwAAAAdAP7/AAABAAwAAAAeAP7/AAABAAwAAAAhAP7/AAABAAwAAAAfAP7/AAABAAwAAAAdAP//AAABAA0AAAAeAAMAAAAGABEAAAAaAAMAAAAFABEAAAAZAAMAAAAEAAUAAAAbAAMAAAAFAAUAAAAcAAMAAAAFAAUAAAAdAAMAAAAFAAUAAAAeAAAAAAACAAIAAAAaAAAAAAAAAA4AAAAcAAAAAAABAA4AAAAdAAAAAAABAA4AAAAbAAAAAAABAAIAAAAvAPn/AAAAAAAAAAAvAPr/AAAAAA0AAAAvAPv/AAAAAA0AAAAwAPn/AAABAAwAAAAwAPr/AAABAA0AAAAxAPn/AAACAAAAAAAxAPr/AAACAAEAAAAxAPv/AAACAA0AAAAvAPz/AAAAAAEAAAAvAP3/AAAAAAIAAAAwAPz/AAABAA0AAAAwAP3/AAABAAIAAAAxAPz/AAACAAEAAAAxAP3/AAACAA4AAAA1AP3/AAADAA4AAAA3AP3/AAACAAIAAAA1APn/AAAAAAAAAAA7APr/AAABAAAAAAA6APn/AAACAAAAAABQAPr/AAACAAwAAABQAPv/AAACAA4AAAA9APr/AAABAAwAAAA+APr/AAABAAwAAABEAPr/AAABAAwAAABFAPr/AAABAAwAAABIAPr/AAABAAEAAABJAPr/AAABAAwAAABMAPr/AAABAAwAAABHAPr/AAABAAwAAABDAPr/AAABAAwAAABPAPr/AAABAAwAAAA7APv/AAABAA4AAAA8APv/AAABAA4AAAA+APv/AAABAA4AAAA/APv/AAABAAEAAABAAPv/AAABAAEAAABBAPv/AAABAA4AAABEAPv/AAABAA4AAABJAPv/AAABAA4AAABMAPv/AAABAA4AAABOAPv/AAABAA4AAAA4APv/AAABAA4AAAA5APv/AAABAA4AAAA1APr/AAAAAA0AAAA1APv/AAAAAA0AAAA3APn/AAABAAwAAAA4APn/AAABAAwAAAA2APz/AAABAA0AAAA3APv/AAABAA0AAAA4APr/AAABAA0AAAA5APr/AAABAAEAAAA2APn/AAABAAAAAAA5APn/AAABAAAAAAA8APr/AAABAAAAAAA/APr/AAABAAAAAABAAPr/AAABAAAAAABBAPr/AAABAAAAAABCAPr/AAABAAAAAABGAPr/AAABAAAAAABKAPr/AAABAAAAAABLAPr/AAABAAAAAABNAPr/AAABAAAAAABOAPr/AAABAAAAAABPAPv/AAABAAIAAABNAPv/AAABAAIAAABLAPv/AAABAAIAAABKAPv/AAABAAIAAABIAPv/AAABAAIAAABHAPv/AAABAAIAAABGAPv/AAABAAIAAABFAPv/AAABAAIAAABDAPv/AAABAAIAAABCAPv/AAABAAIAAAA9APv/AAABAAIAAAA6APv/AAABAAIAAAA3APz/AAACAAEAAAA2AP3/AAABAAIAAAA1APz/AAAAAAEAAAA2APr/AAABAAEAAAA2APv/AAABAAEAAAA3APr/AAABAAEAAAA6APr/AAABAAEAAAA/AP7/AAAEAAUAAABLAAAAAAAAAAIAAABRAP7/AAACAAAAAABGAP//AAAAAA4AAABRAAAAAAACAAIAAABAAP7/AAABAAwAAABBAP7/AAABAAwAAABDAP7/AAABAAwAAABEAP7/AAABAAwAAABGAP7/AAABAAwAAABLAP7/AAABAAwAAABOAP7/AAABAAwAAABJAP7/AAABAAwAAABCAP7/AAABAAAAAABFAP7/AAABAAAAAABIAP7/AAABAAAAAABHAP7/AAABAAAAAABKAP7/AAABAAAAAABMAP7/AAABAAAAAABNAP7/AAABAAAAAABPAP7/AAABAAAAAABQAP7/AAABAAAAAABIAP//AAABAAEAAABLAP//AAABAAEAAABNAP//AAABAAEAAABOAP//AAABAAEAAABQAP//AAABAAEAAABMAAAAAAABAA4AAABPAAAAAAABAA4AAABHAP//AAABAA4AAABJAP//AAABAA4AAABNAAAAAAABAA4AAABOAAAAAAABAAEAAABQAAAAAAABAA4AAABRAP//AAACAA0AAABKAP//AAABAAEAAABMAP//AAABAAEAAABPAP//AAABAAEAAABLAAMAAAAAAAAAAABLAAQAAAAAAA0AAABLAAUAAAAAAAIAAABMAAMAAAABAAAAAABMAAQAAAABAA0AAABMAAUAAAABAA4AAABNAAMAAAABAAwAAABNAAQAAAABAAEAAABNAAUAAAABAAIAAABQAAMAAAABAAAAAABQAAQAAAABAA0AAABQAAUAAAABAAIAAABRAAMAAAABAAwAAABRAAQAAAABAAEAAABRAAUAAAABAAIAAABSAAMAAAACAAwAAABSAAQAAAACAA0AAABSAAUAAAACAAIAAABOAAMAAAABAAAAAABOAAQAAAABAA0AAABOAAUAAAABAA4AAABPAAMAAAABAAAAAABPAAQAAAABAA0AAABPAAUAAAABAA4AAABLAAgAAAAAAAwAAABLAAkAAAAAAA0AAABLAAoAAAAAAAIAAABMAAgAAAABAAwAAABMAAkAAAABAAEAAABMAAoAAAABAA4AAABNAAgAAAABAAAAAABNAAkAAAABAAEAAABNAAoAAAABAAIAAABQAAgAAAACAAwAAABQAAkAAAACAA0AAABQAAoAAAACAA4AAABRAAgAAAABAAAAAABRAAkAAAABAAEAAABRAAoAAAABAAIAAABSAAgAAAACAAwAAABSAAkAAAACAAEAAABSAAoAAAACAA4AAABOAAgAAAABAAAAAABOAAkAAAABAAEAAABOAAoAAAABAAIAAABPAAgAAAABAAwAAABPAAkAAAABAAEAAABPAAoAAAABAA4AAAAwAPv/AAABAA0AAAA=")
 tile_set = SubResource("TileSet_uwrxv")
 
 [node name="Player" parent="." instance=ExtResource("3_lnu2h")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(1154, 2791)
+position = Vector2(614, 362)
 
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Doors" type="Node2D" parent="Objects"]
-
-[node name="Door" parent="Objects/Doors" instance=ExtResource("7_vtaks")]
-position = Vector2(1760, 291)
-door_type = 1
-
-[node name="Door2" parent="Objects/Doors" instance=ExtResource("7_vtaks")]
-position = Vector2(1826, 291)
-mirrored = true
-door_type = 1
 
 [node name="ExitDoors" type="Node2D" parent="Objects/Doors"]
 script = ExtResource("10_ssvqc")
@@ -445,48 +438,543 @@ position = Vector2(1185, 3614)
 mirrored = true
 door_type = 3
 
+[node name="StartingRoom" type="Node2D" parent="Objects/Doors"]
+
+[node name="Door" parent="Objects/Doors/StartingRoom" instance=ExtResource("7_vtaks")]
+position = Vector2(1760, 291)
+door_type = 1
+
+[node name="Door2" parent="Objects/Doors/StartingRoom" instance=ExtResource("7_vtaks")]
+position = Vector2(1826, 291)
+mirrored = true
+door_type = 1
+
+[node name="Door3" parent="Objects/Doors/StartingRoom" instance=ExtResource("7_vtaks")]
+position = Vector2(1825, 1630)
+door_type = 0
+
+[node name="Door4" parent="Objects/Doors/StartingRoom" instance=ExtResource("7_vtaks")]
+position = Vector2(1891, 1630)
+mirrored = true
+door_type = 0
+
+[node name="Hallway" type="Node2D" parent="Objects/Doors"]
+
+[node name="Door5" parent="Objects/Doors/Hallway" instance=ExtResource("7_vtaks")]
+position = Vector2(3300, -224)
+rotation = 1.5708
+door_type = 0
+
+[node name="Door6" parent="Objects/Doors/Hallway" instance=ExtResource("7_vtaks")]
+position = Vector2(3300, -161)
+rotation = 1.5708
+mirrored = true
+door_type = 0
+
+[node name="Door" parent="Objects/Doors/Hallway" instance=ExtResource("7_vtaks")]
+position = Vector2(4662, 2720)
+rotation = 1.5708
+door_type = 1
+
+[node name="Door2" parent="Objects/Doors/Hallway" instance=ExtResource("7_vtaks")]
+position = Vector2(4662, 2784)
+rotation = 1.5708
+mirrored = true
+door_type = 1
+
+[node name="Door3" parent="Objects/Doors/Hallway" instance=ExtResource("7_vtaks")]
+position = Vector2(2147, 2206)
+
+[node name="Door4" parent="Objects/Doors/Hallway" instance=ExtResource("7_vtaks")]
+position = Vector2(867, 1377)
+rotation = 1.5708
+mirrored = true
+
+[node name="Door7" parent="Objects/Doors/Hallway" instance=ExtResource("7_vtaks")]
+position = Vector2(672, 1825)
+rotation = 4.71239
+mirrored = true
+door_type = 1
+
+[node name="Door8" parent="Objects/Doors/Hallway" instance=ExtResource("7_vtaks")]
+position = Vector2(672, 1887)
+rotation = 4.71239
+door_type = 1
+
+[node name="Random" type="Node2D" parent="Objects/Doors"]
+
+[node name="Door" parent="Objects/Doors/Random" instance=ExtResource("7_vtaks")]
+position = Vector2(2273, 2587)
+door_type = 0
+
+[node name="Door2" parent="Objects/Doors/Random" instance=ExtResource("7_vtaks")]
+position = Vector2(2340, 2587)
+mirrored = true
+door_type = 0
+
+[node name="Door3" parent="Objects/Doors/Random" instance=ExtResource("7_vtaks")]
+position = Vector2(2720, 2587)
+door_type = 0
+
+[node name="Door4" parent="Objects/Doors/Random" instance=ExtResource("7_vtaks")]
+position = Vector2(2787, 2587)
+mirrored = true
+door_type = 0
+
+[node name="Door5" parent="Objects/Doors/Random" instance=ExtResource("7_vtaks")]
+position = Vector2(3169, 2587)
+door_type = 0
+
+[node name="Door6" parent="Objects/Doors/Random" instance=ExtResource("7_vtaks")]
+position = Vector2(3236, 2587)
+mirrored = true
+door_type = 0
+
 [node name="Chests" type="Node2D" parent="Objects"]
+script = ExtResource("11_ssvqc")
 
 [node name="Normal" type="Node2D" parent="Objects/Chests"]
+unique_name_in_owner = true
 
 [node name="Chest" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
-position = Vector2(1587, 929)
+position = Vector2(480, 734)
 
-[node name="Hallway" type="Node2D" parent="Objects/Chests"]
+[node name="Chest2" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1570, 417)
+
+[node name="Chest3" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1631, 196)
+
+[node name="Chest4" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(2334, -122)
+
+[node name="Chest5" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1698, -317)
+
+[node name="Chest6" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(3165, -444)
+
+[node name="Chest7" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(3679, -378)
+
+[node name="Chest8" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(5150, -316)
+
+[node name="Chest9" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(4063, -125)
+
+[node name="Chest10" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(5024, -59)
+
+[node name="Chest11" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(5089, 258)
+
+[node name="Chest12" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(4893, 579)
+
+[node name="Chest13" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(5025, 1374)
+
+[node name="Chest14" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(4834, 991)
+
+[node name="Chest15" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(5218, 991)
+
+[node name="Chest16" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(3296, 1375)
+
+[node name="Chest19" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(2976, 1820)
+
+[node name="Chest20" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(2589, 2144)
+
+[node name="Chest21" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(3358, 2211)
+
+[node name="Chest22" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(2356, 1614)
+
+[node name="Chest23" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(2598, 1257)
+
+[node name="Chest24" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(2863, 1066)
+
+[node name="Chest25" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(3487, 863)
+
+[node name="Chest26" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(2339, 1029)
+
+[node name="Chest27" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(2299, 1188)
+
+[node name="Chest28" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(2333, 1855)
+
+[node name="Chest29" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1570, 2146)
+
+[node name="Chest30" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1374, 1832)
+
+[node name="Chest31" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1421, 1471)
+
+[node name="Chest32" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1090, 1600)
+
+[node name="Chest33" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1119, 1378)
+
+[node name="Chest34" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(226, 1759)
+
+[node name="Chest35" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(226, 1823)
+
+[node name="Chest36" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(481, 1760)
+
+[node name="Chest37" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(480, 1822)
+
+[node name="Chest38" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(993, 2021)
+
+[node name="Chest39" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1059, 2211)
+
+[node name="Chest40" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1310, 2333)
+
+[node name="Chest41" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1310, 2718)
+
+[node name="Chest43" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(994, 2912)
+
+[node name="Chest44" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1312, 3102)
+
+[node name="Chest45" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(994, 3295)
+
+[node name="Chest46" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1311, 3487)
+
+[node name="Chest47" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1890, 1379)
+
+[node name="Chest48" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1444, 1087)
+
+[node name="Chest50" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(987, 1085)
+
+[node name="Chest49" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(1886, 611)
+
+[node name="Chest17" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(4834, 1823)
+
+[node name="Chest18" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(4834, 1823)
+
+[node name="Chest42" parent="Objects/Chests/Normal" instance=ExtResource("4_lbhrr")]
+position = Vector2(5217, 1823)
+
+[node name="Random" type="Node2D" parent="Objects/Chests"]
+unique_name_in_owner = true
+
+[node name="Chest" parent="Objects/Chests/Random" instance=ExtResource("4_lbhrr")]
+position = Vector2(2305, 3260)
+
+[node name="Chest2" parent="Objects/Chests/Random" instance=ExtResource("4_lbhrr")]
+position = Vector2(2755, 3260)
+
+[node name="Chest3" parent="Objects/Chests/Random" instance=ExtResource("4_lbhrr")]
+position = Vector2(3203, 3260)
 
 [node name="Pills" type="Node2D" parent="Objects"]
+script = ExtResource("13_1kice")
 
 [node name="Pill" parent="Objects/Pills" instance=ExtResource("5_iywne")]
-position = Vector2(1044, 848)
+position = Vector2(863, 379)
+on_table = true
 
 [node name="Pill2" parent="Objects/Pills" instance=ExtResource("5_iywne")]
 position = Vector2(1312, 888)
 on_table = true
 
+[node name="Pill3" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(2015, 551)
+
+[node name="Pill4" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(1599, -23)
+
+[node name="Pill5" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(3106, -306)
+
+[node name="Pill6" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(4429, -394)
+
+[node name="Pill7" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(4923, 253)
+
+[node name="Pill8" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(5631, 1690)
+
+[node name="Pill9" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(4422, 1080)
+
+[node name="Pill11" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(3359, 1465)
+on_table = true
+
+[node name="Pill12" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(2848, 2295)
+on_table = true
+
+[node name="Pill13" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(926, 1911)
+on_table = true
+
+[node name="Pill14" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(1454, 1744)
+
+[node name="Pill15" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(2390, 1416)
+
+[node name="Pill16" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(3109, 1025)
+
+[node name="Pill17" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(355, 1733)
+
+[node name="Pill18" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(1155, 3400)
+
+[node name="Pill10" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(4834, 1341)
+on_table = true
+
+[node name="Pill19" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(1858, 1827)
+
+[node name="Pill20" parent="Objects/Pills" instance=ExtResource("5_iywne")]
+position = Vector2(1741, 2059)
+
 [node name="Monsters" type="Node2D" parent="Objects"]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("12_ir15t")
 
-[node name="Monster" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
-position = Vector2(1927, -125)
+[node name="Random" type="Node2D" parent="Objects/Monsters"]
 
-[node name="Monster4" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
-position = Vector2(1141, 2640)
+[node name="Left" type="Node2D" parent="Objects/Monsters/Random"]
+
+[node name="Monster" parent="Objects/Monsters/Random/Left" instance=ExtResource("9_0tnpc")]
+position = Vector2(2305, 3134)
+
+[node name="Monster2" parent="Objects/Monsters/Random/Left" instance=ExtResource("9_0tnpc")]
+position = Vector2(2305, 2964)
+
+[node name="Monster3" parent="Objects/Monsters/Random/Left" instance=ExtResource("9_0tnpc")]
+position = Vector2(2305, 2788)
+
+[node name="Monster4" parent="Objects/Monsters/Random/Left" instance=ExtResource("9_0tnpc")]
+position = Vector2(2305, 2705)
+
+[node name="Middle" type="Node2D" parent="Objects/Monsters/Random"]
+
+[node name="Monster5" parent="Objects/Monsters/Random/Middle" instance=ExtResource("9_0tnpc")]
+position = Vector2(2755, 3134)
+
+[node name="Monster6" parent="Objects/Monsters/Random/Middle" instance=ExtResource("9_0tnpc")]
+position = Vector2(2755, 2964)
+
+[node name="Monster7" parent="Objects/Monsters/Random/Middle" instance=ExtResource("9_0tnpc")]
+position = Vector2(2755, 2788)
+
+[node name="Monster8" parent="Objects/Monsters/Random/Middle" instance=ExtResource("9_0tnpc")]
+position = Vector2(2755, 2705)
+
+[node name="Right" type="Node2D" parent="Objects/Monsters/Random"]
+
+[node name="Monster9" parent="Objects/Monsters/Random/Right" instance=ExtResource("9_0tnpc")]
+position = Vector2(3203, 3134)
+
+[node name="Monster10" parent="Objects/Monsters/Random/Right" instance=ExtResource("9_0tnpc")]
+position = Vector2(3203, 2964)
+
+[node name="Monster11" parent="Objects/Monsters/Random/Right" instance=ExtResource("9_0tnpc")]
+position = Vector2(3203, 2788)
+
+[node name="Monster12" parent="Objects/Monsters/Random/Right" instance=ExtResource("9_0tnpc")]
+position = Vector2(3203, 2705)
 
 [node name="Monster5" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
-position = Vector2(1125, 3469)
-plane = 2
-
-[node name="Monster6" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
-position = Vector2(1093, 3257)
-
-[node name="Monster2" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
-position = Vector2(1927, 151)
+position = Vector2(2604, 1537)
 plane = 1
 
-[node name="Monster3" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
-position = Vector2(1783, 1349)
+[node name="Monster6" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(2855, 1284)
+plane = 1
+
+[node name="Monster7" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(2588, 1122)
+plane = 1
+
+[node name="Monster8" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(2344, 1333)
+plane = 1
+
+[node name="Monster9" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(1381, 1697)
+plane = 1
+
+[node name="Monster10" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(155, 1611)
+
+[node name="Monster11" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(483, 1937)
+
+[node name="Monster12" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(327, 1881)
 plane = 2
+
+[node name="Monster13" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(803, 2441)
+
+[node name="Monster14" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(769, 1483)
+plane = 1
+
+[node name="Monster15" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(867, 2124)
+plane = 2
+
+[node name="Monster16" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(2840, 1904)
+plane = 2
+
+[node name="Monster17" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(2999, 2400)
+plane = 2
+
+[node name="Monster18" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(4820, 2570)
+plane = 2
+
+[node name="Monster19" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(4768, 2839)
+plane = 2
+
+[node name="Monster20" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(5022, 2895)
+plane = 2
+
+[node name="Monster21" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(5048, 2718)
+plane = 2
+
+[node name="Monster22" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(4974, 2571)
+plane = 2
+
+[node name="Monster23" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(3585, 2441)
+plane = 1
+
+[node name="Monster24" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(2198, 2441)
+
+[node name="Monster25" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(3169, 2033)
+plane = 2
+
+[node name="Monster26" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(3440, 1663)
+plane = 2
+
+[node name="Monster27" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(4631, 1380)
+plane = 1
+
+[node name="Monster28" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(5393, 1286)
+plane = 1
+
+[node name="Monster29" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(4709, 840)
+
+[node name="Monster30" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(5227, 1937)
+
+[node name="Monster31" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(5022, 1504)
+plane = 2
+
+[node name="Monster32" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(4297, 1270)
+plane = 1
+
+[node name="Monster33" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(4996, 561)
+
+[node name="Monster34" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(4879, 238)
+plane = 1
+
+[node name="Monster35" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(4559, -103)
+
+[node name="Monster36" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(4837, -362)
+
+[node name="Monster37" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(3491, -429)
+plane = 1
+
+[node name="Monster38" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(3041, -244)
+plane = 1
+
+[node name="Monster39" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(1804, -331)
+
+[node name="Monster40" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(2139, -106)
+
+[node name="Monster41" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(1726, 172)
+
+[node name="Monster42" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(1664, 799)
+plane = 2
+
+[node name="Monster43" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(1909, 1213)
+plane = 2
+
+[node name="Monster44" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(696, 1197)
+
+[node name="Monster45" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(956, 809)
+
+[node name="Monster46" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(1021, 2796)
+
+[node name="Monster47" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(1100, 3180)
+
+[node name="Monster48" parent="Objects/Monsters" instance=ExtResource("9_0tnpc")]
+position = Vector2(1136, 3489)
+plane = 1
 
 [node name="Furnaces" type="Node2D" parent="Objects"]
 
@@ -682,22 +1170,190 @@ shape = SubResource("RectangleShape2D_kvuet")
 [connection signal="update_hud" from="." to="HUD" method="_on_game_update_hud"]
 [connection signal="timeout" from="Timers/PillTimer" to="." method="_on_pill_timer_timeout"]
 [connection signal="timeout" from="Timers/OfferingTeethTimer" to="Objects/OfferingTeeth" method="_on_offering_teeth_timer_timeout"]
+[connection signal="rand_chest_spawned" from="Objects/Chests" to="Objects/Monsters" method="_on_chests_rand_chest_spawned"]
 [connection signal="chest_opened" from="Objects/Chests/Normal/Chest" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest2" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest3" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest4" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest5" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest6" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest7" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest8" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest9" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest10" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest11" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest12" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest13" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest14" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest15" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest16" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest19" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest20" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest21" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest22" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest23" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest24" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest25" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest26" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest27" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest28" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest29" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest30" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest31" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest32" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest33" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest34" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest35" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest36" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest37" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest38" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest39" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest40" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest41" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest43" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest44" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest45" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest46" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest47" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest48" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest50" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest49" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest17" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest18" to="." method="_on_chest_opened"]
+[connection signal="chest_opened" from="Objects/Chests/Normal/Chest42" to="." method="_on_chest_opened"]
 [connection signal="picked_up_pill" from="Objects/Pills/Pill" to="." method="_on_pill_picked_up"]
 [connection signal="picked_up_pill" from="Objects/Pills/Pill2" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill3" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill4" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill5" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill6" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill7" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill8" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill9" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill11" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill12" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill13" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill14" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill15" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill16" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill17" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill18" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill10" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill19" to="." method="_on_pill_picked_up"]
+[connection signal="picked_up_pill" from="Objects/Pills/Pill20" to="." method="_on_pill_picked_up"]
 [connection signal="monsters_died" from="Objects/Monsters" to="Objects/Doors/ExitDoors" method="_on_monsters_monsters_died"]
-[connection signal="player_attacked" from="Objects/Monsters/Monster" to="." method="_on_monster_player_attacked"]
-[connection signal="player_attacked" from="Objects/Monsters/Monster" to="Player" method="_on_monster_player_attacked"]
-[connection signal="player_attacked" from="Objects/Monsters/Monster4" to="." method="_on_monster_player_attacked"]
-[connection signal="player_attacked" from="Objects/Monsters/Monster4" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Left/Monster" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Left/Monster" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Left/Monster2" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Left/Monster2" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Left/Monster3" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Left/Monster3" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Left/Monster4" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Left/Monster4" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Middle/Monster5" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Middle/Monster5" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Middle/Monster6" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Middle/Monster6" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Middle/Monster7" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Middle/Monster7" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Middle/Monster8" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Middle/Monster8" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Right/Monster9" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Right/Monster9" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Right/Monster10" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Right/Monster10" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Right/Monster11" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Right/Monster11" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Right/Monster12" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Random/Right/Monster12" to="Player" method="_on_monster_player_attacked"]
 [connection signal="player_attacked" from="Objects/Monsters/Monster5" to="." method="_on_monster_player_attacked"]
 [connection signal="player_attacked" from="Objects/Monsters/Monster5" to="Player" method="_on_monster_player_attacked"]
 [connection signal="player_attacked" from="Objects/Monsters/Monster6" to="." method="_on_monster_player_attacked"]
 [connection signal="player_attacked" from="Objects/Monsters/Monster6" to="Player" method="_on_monster_player_attacked"]
-[connection signal="player_attacked" from="Objects/Monsters/Monster2" to="." method="_on_monster_player_attacked"]
-[connection signal="player_attacked" from="Objects/Monsters/Monster2" to="Player" method="_on_monster_player_attacked"]
-[connection signal="player_attacked" from="Objects/Monsters/Monster3" to="." method="_on_monster_player_attacked"]
-[connection signal="player_attacked" from="Objects/Monsters/Monster3" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster7" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster7" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster8" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster8" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster9" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster9" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster10" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster10" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster11" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster11" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster12" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster12" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster13" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster13" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster14" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster14" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster15" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster15" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster16" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster16" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster17" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster17" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster18" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster18" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster19" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster19" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster20" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster20" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster21" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster21" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster22" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster22" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster23" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster23" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster24" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster24" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster25" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster25" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster26" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster26" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster27" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster27" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster28" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster28" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster29" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster29" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster30" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster30" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster31" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster31" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster32" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster32" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster33" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster33" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster34" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster34" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster35" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster35" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster36" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster36" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster37" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster37" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster38" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster38" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster39" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster39" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster40" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster40" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster41" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster41" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster42" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster42" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster43" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster43" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster44" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster44" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster45" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster45" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster46" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster46" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster47" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster47" to="Player" method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster48" to="." method="_on_monster_player_attacked"]
+[connection signal="player_attacked" from="Objects/Monsters/Monster48" to="Player" method="_on_monster_player_attacked"]
 [connection signal="actually_offer" from="Areas" to="." method="_on_areas_actually_offer"]
 [connection signal="actually_offer" from="Areas" to="HUD" method="_on_areas_actually_offer"]
 [connection signal="offer" from="Areas" to="HUD" method="_on_areas_offer"]

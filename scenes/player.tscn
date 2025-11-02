@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://miuv0twkkost"]
+[gd_scene load_steps=115 format=3 uid="uid://miuv0twkkost"]
 
 [ext_resource type="Script" uid="uid://cdjhyb4dbgip6" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://cfuntbfqmun3u" path="res://assets/character/idle.png" id="2_g2els"]
@@ -6,6 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://de147nmj5kwur" path="res://assets/character/walk.png" id="3_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://cf2cviqvgi34t" path="res://assets/character/hurt.png" id="3_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://cqgeah12tj3hn" path="res://assets/character/run.png" id="5_tuyoq"]
+
+[sub_resource type="Gradient" id="Gradient_tuyoq"]
+offsets = PackedFloat32Array(0.140351, 0.622807)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fjrip"]
+gradient = SubResource("Gradient_tuyoq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_74r1k"]
 atlas = ExtResource("2_qlg0r")
@@ -827,6 +836,11 @@ bg_color = Color(0.886262, 0.886261, 0.886262, 1)
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_3vyb7")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_fjrip")
+texture_scale = 3.0
+height = 80.0
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

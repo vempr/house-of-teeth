@@ -2,7 +2,7 @@ extends StaticBody2D
 
 signal chest_opened(has_tooth: bool)
 
-@export var has_tooth := true
+@export var has_tooth := false
 var in_open_zone := false
 var opened := false
 

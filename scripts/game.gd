@@ -41,7 +41,8 @@ func _on_pill_picked_up() -> void:
 
 
 func _on_pill_timer_timeout() -> void:
-	pill_wore_off.emit()
+	if !game_won:
+		pill_wore_off.emit()
 
 
 func _on_monster_player_attacked() -> void:
