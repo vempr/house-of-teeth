@@ -17,6 +17,8 @@ universal_fade/patterns_directory="res://addons/UniversalFade/Patterns"
 config/name="house-of-teeth"
 run/main_scene="uid://dxfu854duwa3o"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/bg_color=Color(0.05, 0.0165, 0.0338083, 1)
+boot_splash/image="uid://db57ra42mqyc"
 config/icon="res://icon.svg"
 
 [autoload]
