@@ -28,6 +28,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if picked_up == false:
 		if Input.is_action_just_pressed("pick_up") && can_be_picked_up:
+			%Ding.play()
 			picked_up = true
 			picked_up_pill.emit()
 			

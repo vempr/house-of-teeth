@@ -53,6 +53,7 @@ func _process(_delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("open_door") && can_open_door:
+		%OpenDoor.play()
 		is_open = !is_open
 		if is_open:
 			%CollisionShape.set_deferred("disabled", true)

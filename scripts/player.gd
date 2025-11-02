@@ -22,6 +22,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_dead || !can_move:
+		%Walk.stop()
 		return
 	
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -35,6 +36,11 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = current_velocity
 	move_and_slide()
+	
+	if direction != Vector2.ZERO && !%Walk.playing:
+		%Walk.play()
+	elif direction == Vector2.ZERO && %Walk.playing:
+		%Walk.stop()
 	
 	if is_playing_hurt_anim:
 		return

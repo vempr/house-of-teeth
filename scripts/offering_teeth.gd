@@ -16,6 +16,7 @@ func _on_game_player_won() -> void:
 func _on_offering_teeth_timer_timeout() -> void:
 	if t_i >= 32:
 		%OfferingTeethTimer.stop()
+		%BoneShell.stop()
 		return
 	
 	var tween = create_tween()

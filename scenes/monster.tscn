@@ -200,6 +200,7 @@ unique_name_in_owner = true
 wait_time = 0.8
 
 [node name="Areas" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="AreaRight" type="Area2D" parent="Areas"]
 

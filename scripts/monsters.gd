@@ -21,6 +21,12 @@ func _on_game_player_won() -> void:
 	for monster in monsters:
 		if monster.name != "Random":
 			monster.die()
+		monster.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	%Hit.volume_db = 5.0
+	%Hit.play()
+	%Hit.volume_db = -5.0
+	%BoneSnap.play(0.2)
 	
 	z_index = -1
 	monsters_died.emit()

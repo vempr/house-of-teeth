@@ -18,6 +18,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if opened == false:
 		if Input.is_action_just_pressed("open_chest") && in_open_zone:
+			%Chest.play()
 			%Player.play_open_chest_animation()
 			
 			%ClosedSpriteShader.visible = false
@@ -30,6 +31,7 @@ func _process(_delta: float) -> void:
 			if has_tooth:
 				%Tooth.visible = true
 				%AnimationPlayer.play("tooth")
+				%Bone.play()
 
 
 func _on_open_area_body_entered(body: Node2D) -> void:

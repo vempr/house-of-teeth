@@ -24,6 +24,9 @@ func _on_game_player_died() -> void:
 
 
 func _on_delay_timer_timeout() -> void:
+	%Distorted.stop()
+	%Bite.play(0.2)
+	%BoneSnap.play(0.2)
 	visible = true
 	%Desaturate.visible = false
 	%AnimatedSprite.play(anim_names[i])

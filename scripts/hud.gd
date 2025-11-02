@@ -23,6 +23,7 @@ func _on_game_update_hud(teeth: int, pills: int) -> void:
 	
 	%Teeth.text = str(teeth) + "/32"
 	$Pills.text = str(pills)
+	%OfferIncomplete.text = "You need " + str(32 - teeth) + " more teeth to complete the offering."
 
 
 func _on_areas_offer(there: bool) -> void:

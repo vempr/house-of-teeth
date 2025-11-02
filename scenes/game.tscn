@@ -1,20 +1,31 @@
-[gd_scene load_steps=30 format=4 uid="uid://dxfu854duwa3o"]
+[gd_scene load_steps=41 format=4 uid="uid://dxfu854duwa3o"]
 
 [ext_resource type="Script" uid="uid://cmne6wlc863bf" path="res://scripts/game.gd" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c7ck1oe8vov4d" path="res://assets/house/4 BigSet.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bkhddelw6cfto" path="res://scenes/mm_canvas_layer.tscn" id="3_5newe"]
 [ext_resource type="Script" uid="uid://c6y10wr1kbbpr" path="res://scripts/main_menu.gd" id="3_37s47"]
 [ext_resource type="PackedScene" uid="uid://7jre5k5tbo8n" path="res://scenes/jumpscare.tscn" id="3_dinhu"]
+[ext_resource type="AudioStream" uid="uid://cqiq5gr3clpt1" path="res://sound/ding.mp3" id="3_js0lu"]
 [ext_resource type="PackedScene" uid="uid://bkdekqe5tujfx" path="res://scenes/hud.tscn" id="3_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://miuv0twkkost" path="res://scenes/player.tscn" id="3_lnu2h"]
+[ext_resource type="AudioStream" uid="uid://gsqkm5ghfi03" path="res://sound/bone-shell.mp3" id="3_qouja"]
+[ext_resource type="AudioStream" uid="uid://8kppeadfo7jh" path="res://sound/bone.mp3" id="3_v2yb1"]
+[ext_resource type="AudioStream" uid="uid://b3frdcyq5d00b" path="res://sound/open-door.mp3" id="3_wljb1"]
 [ext_resource type="PackedScene" uid="uid://cq17o4x3ewrfe" path="res://scenes/chest.tscn" id="4_lbhrr"]
+[ext_resource type="AudioStream" uid="uid://wh3w27x5wqwy" path="res://sound/bone-snap.mp3" id="4_wljb1"]
 [ext_resource type="PackedScene" uid="uid://cl11st8cxdsq3" path="res://scenes/pause_menu.tscn" id="5_bt5mj"]
 [ext_resource type="PackedScene" uid="uid://bapm6iyiqj0om" path="res://scenes/pill.tscn" id="5_iywne"]
+[ext_resource type="AudioStream" uid="uid://dfefb4ju53av3" path="res://sound/distorted-sound.mp3" id="6_js0lu"]
 [ext_resource type="Shader" uid="uid://bku1ttlbl4krw" path="res://shaders/crt.gdshader" id="6_p57ef"]
 [ext_resource type="Script" uid="uid://doxn6tui2je14" path="res://scripts/overlay.gd" id="6_u5sy4"]
+[ext_resource type="AudioStream" uid="uid://ddtwyhusg2g1a" path="res://sound/chest-opening.mp3" id="6_v2yb1"]
+[ext_resource type="AudioStream" uid="uid://dy6vcrb1l45m1" path="res://sound/hitting-snow.mp3" id="7_gxtfn"]
 [ext_resource type="PackedScene" uid="uid://dk08oh85hmylx" path="res://scenes/door.tscn" id="7_vtaks"]
 [ext_resource type="Shader" uid="uid://fgcrkyjwhmji" path="res://shaders/desaturate.gdshader" id="8_gee14"]
+[ext_resource type="AudioStream" uid="uid://bptw86p6d5pgn" path="res://sound/monster-bite.mp3" id="8_twgab"]
 [ext_resource type="PackedScene" uid="uid://co3iptt2fce3t" path="res://scenes/monster.tscn" id="9_0tnpc"]
+[ext_resource type="AudioStream" uid="uid://vwjetf7uhd3d" path="res://sound/opening-pill-bottle.mp3" id="9_02fa5"]
+[ext_resource type="AudioStream" uid="uid://dar65k1dq40l5" path="res://sound/walk.mp3" id="10_nepv3"]
 [ext_resource type="Script" uid="uid://bvnafwkaqtcwo" path="res://scripts/exit_doors.gd" id="10_ssvqc"]
 [ext_resource type="Script" uid="uid://dy6yvrri3xqem" path="res://scripts/chests.gd" id="11_ssvqc"]
 [ext_resource type="Script" uid="uid://df7edu2072td0" path="res://scripts/monsters.gd" id="12_ir15t"]
@@ -354,6 +365,61 @@ process_mode = 1
 material = SubResource("ShaderMaterial_gee14")
 script = ExtResource("1_uwrxv")
 
+[node name="SFX" type="Node" parent="."]
+
+[node name="Ding" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("3_js0lu")
+volume_db = -10.0
+
+[node name="Bone" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("3_v2yb1")
+
+[node name="OpenDoor" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("3_wljb1")
+
+[node name="BoneShell" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("3_qouja")
+
+[node name="BoneSnap" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("4_wljb1")
+volume_db = 5.0
+
+[node name="Chest" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("6_v2yb1")
+
+[node name="Distorted" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("6_js0lu")
+volume_db = -20.0
+pitch_scale = 0.8
+
+[node name="Hit" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("7_gxtfn")
+volume_db = -5.0
+
+[node name="Bite" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("8_twgab")
+volume_db = 5.0
+pitch_scale = 1.2
+
+[node name="PillBottle" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("9_02fa5")
+volume_db = 10.0
+
+[node name="Walk" type="AudioStreamPlayer" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("10_nepv3")
+volume_db = -15.0
+
 [node name="MainMenu" type="Node2D" parent="."]
 script = ExtResource("3_37s47")
 
@@ -437,7 +503,7 @@ tile_set = SubResource("TileSet_uwrxv")
 [node name="Player" parent="." instance=ExtResource("3_lnu2h")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(583, 338)
+position = Vector2(996, 535)
 
 [node name="Objects" type="Node2D" parent="."]
 

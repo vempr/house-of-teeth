@@ -107,6 +107,7 @@ func stop() -> void:
 	is_moving = false
 	%AnimatedSprite.stop()
 	%AttackTimer.stop()
+	%Areas.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func die() -> void:
