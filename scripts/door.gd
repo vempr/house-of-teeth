@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-enum DOOR_TYPE { ROUNDED, SQUARE, NONE }
+enum DOOR_TYPE { ROUNDED, SQUARE, NONE, STATIC }
 
 @export var mirrored := false
 @export var door_type := DOOR_TYPE.NONE
@@ -14,6 +14,7 @@ func _ready() -> void:
 			door_type = DOOR_TYPE.ROUNDED
 		else:
 			door_type = DOOR_TYPE.SQUARE
+
 	
 	match door_type:
 		DOOR_TYPE.ROUNDED:
@@ -35,9 +36,22 @@ func _ready() -> void:
 			if mirrored:
 				%ClosedSquareSprite.flip_h = true
 				%OpenSquareSprite.flip_h = true
+		
+		DOOR_TYPE.STATIC:
+			%Rounded.visible = false
+			%Square.visible = true
+			%ClosedSquareSprite.visible = true
+			%OpenSquareSprite.visible = false
+			
+			if mirrored:
+				%ClosedSquareSprite.flip_h = true
+				%OpenSquareSprite.flip_h = true
 
 
 func _process(_delta: float) -> void:
+	if door_type == DOOR_TYPE.STATIC:
+		return
+	
 	if Input.is_action_just_pressed("open_door") && can_open_door:
 		is_open = !is_open
 		if is_open:
@@ -68,3 +82,9 @@ func _on_openable_area_body_entered(body: Node2D) -> void:
 func _on_openable_area_body_exited(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		can_open_door = false
+
+
+func static_open() -> void:
+	%CollisionShape.set_deferred("disabled", true)
+	%ClosedSquareSprite.visible = false
+	%OpenSquareSprite.visible = true

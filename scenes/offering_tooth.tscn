@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://drb5fhtrdedod"]
+
+[ext_resource type="Texture2D" uid="uid://rjekdiajjoed" path="res://assets/aseprite/tooth.png" id="1_flg6t"]
+[ext_resource type="Script" uid="uid://dws8luggbruii" path="res://scripts/offering_tooth.gd" id="1_vdu05"]
+
+[sub_resource type="Animation" id="Animation_l11wb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_flg6t"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l11wb"]
+_data = {
+&"RESET": SubResource("Animation_l11wb"),
+&"new_animation": SubResource("Animation_flg6t")
+}
+
+[node name="OfferingTooth" type="Node2D"]
+script = ExtResource("1_vdu05")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_flg6t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_l11wb")
+}

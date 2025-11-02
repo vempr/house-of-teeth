@@ -4,22 +4,25 @@ signal pill_used
 signal pill_wore_off
 signal update_hud(teeth: int, pills: int)
 signal player_died
+signal player_won
 
 
 var game_state := {
 	"health": 5,
-	"teeth": 0,
-	"pills": 0,
+	"teeth": 32,
+	"pills": 5,
 }
+var game_won := false
 
 
 func _ready() -> void:
 	%Monsters.visible = false
 	%CRT.visible = true
+	update_hud.emit(game_state.teeth, game_state.pills)
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("use_pill") && game_state.pills > 0 && game_state.health > 0:
+	if Input.is_action_just_pressed("use_pill") && game_state.pills > 0 && game_state.health > 0 && !game_won:
 		game_state.pills -= 1
 		update_hud.emit(game_state.teeth, game_state.pills)
 		pill_used.emit()
@@ -64,3 +67,11 @@ func flash() -> void:
 	%BlackOverlay.modulate.a = 0.0
 	var tween = create_tween()
 	tween.parallel().tween_property(%BlackOverlay, "modulate:a", 1.0, 0.4)
+
+
+func _on_areas_actually_offer() -> void:
+	if game_state.teeth < 32:
+		return
+	
+	game_won = true
+	player_won.emit()

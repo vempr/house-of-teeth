@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://co3iptt2fce3t"]
+[gd_scene load_steps=28 format=3 uid="uid://co3iptt2fce3t"]
 
 [ext_resource type="Script" uid="uid://bc875eqg35ov1" path="res://scripts/monster.gd" id="1_1cbnp"]
 [ext_resource type="Texture2D" uid="uid://b5ur05rhbc7a0" path="res://assets/monster/tooth walker sprite-Sheet.png" id="1_uwnm8"]
@@ -26,6 +26,38 @@ region = Rect2(0, 256, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_70tfl"]
 atlas = ExtResource("1_uwnm8")
 region = Rect2(64, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fttm7"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akk5r"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2c6u"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0ec1"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4862"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(256, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iwja"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(320, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opw4d"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydrmy"]
+atlas = ExtResource("1_uwnm8")
+region = Rect2(64, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1cbnp"]
 atlas = ExtResource("1_uwnm8")
@@ -82,6 +114,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fttm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akk5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2c6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0ec1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4862")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0iwja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opw4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydrmy")
+}],
+"loop": false,
+"name": &"die",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_1cbnp")
 }, {
 "duration": 1.0,
@@ -110,6 +171,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1cbnp"]
 size = Vector2(216, 178)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c47ug"]
+size = Vector2(10, 122)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jlss8"]
+size = Vector2(100, 10)
+
 [node name="Monster" type="Node2D"]
 z_index = 1
 script = ExtResource("1_1cbnp")
@@ -118,10 +185,8 @@ script = ExtResource("1_1cbnp")
 unique_name_in_owner = true
 scale = Vector2(4, 3)
 sprite_frames = SubResource("SpriteFrames_ei7v0")
-animation = &"attack"
+animation = &"walk"
 autoplay = "walk"
-frame = 5
-frame_progress = 1.0
 
 [node name="AttackArea" type="Area2D" parent="."]
 collision_mask = 3
@@ -134,24 +199,36 @@ shape = SubResource("RectangleShape2D_1cbnp")
 unique_name_in_owner = true
 wait_time = 0.8
 
-[node name="Rays" type="Node2D" parent="."]
+[node name="Areas" type="Node2D" parent="."]
 
-[node name="RayCastRight" type="RayCast2D" parent="Rays"]
-unique_name_in_owner = true
-target_position = Vector2(50, 0)
+[node name="AreaRight" type="Area2D" parent="Areas"]
 
-[node name="RayCastLeft" type="RayCast2D" parent="Rays"]
-unique_name_in_owner = true
-target_position = Vector2(-50, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AreaRight"]
+position = Vector2(52, 19)
+shape = SubResource("RectangleShape2D_c47ug")
 
-[node name="RayCastUp" type="RayCast2D" parent="Rays"]
-unique_name_in_owner = true
-target_position = Vector2(0, -50)
+[node name="AreaLeft" type="Area2D" parent="Areas"]
 
-[node name="RayCastDown" type="RayCast2D" parent="Rays"]
-unique_name_in_owner = true
-target_position = Vector2(0, 150)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AreaLeft"]
+position = Vector2(-52, 19)
+shape = SubResource("RectangleShape2D_c47ug")
+
+[node name="AreaUp" type="Area2D" parent="Areas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AreaUp"]
+position = Vector2(3, -51)
+shape = SubResource("RectangleShape2D_jlss8")
+
+[node name="AreaDown" type="Area2D" parent="Areas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AreaDown"]
+position = Vector2(3, 92)
+shape = SubResource("RectangleShape2D_jlss8")
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="Areas/AreaRight" to="." method="_on_area_right_body_entered"]
+[connection signal="body_entered" from="Areas/AreaLeft" to="." method="_on_area_left_body_entered"]
+[connection signal="body_entered" from="Areas/AreaUp" to="." method="_on_area_up_body_entered"]
+[connection signal="body_entered" from="Areas/AreaDown" to="." method="_on_area_down_body_entered"]
