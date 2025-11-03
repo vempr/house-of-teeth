@@ -15,6 +15,8 @@ func _ready() -> void:
 	
 	visible = GLOBAL.start_directly
 	GLOBAL.start_directly = false
+	
+	%Introduction.modulate.a = 1.0
 
 
 func _on_game_update_hud(teeth: int, pills: int) -> void:
@@ -46,3 +48,8 @@ func _on_areas_actually_offer() -> void:
 		return
 	
 	visible = false
+
+
+func _on_intro_timer_timeout() -> void:
+	var tween = create_tween()
+	tween.tween_property(%Introduction, "modulate:a", 0.0, 2.0)

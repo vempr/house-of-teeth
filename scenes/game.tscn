@@ -397,7 +397,6 @@ stream = ExtResource("6_v2yb1")
 unique_name_in_owner = true
 stream = ExtResource("6_js0lu")
 volume_db = -20.0
-pitch_scale = 0.8
 
 [node name="Hit" type="AudioStreamPlayer" parent="SFX"]
 unique_name_in_owner = true
@@ -475,6 +474,10 @@ one_shot = true
 [node name="OfferingTeethTimer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
 wait_time = 0.05
+
+[node name="IntroTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 5.0
 
 [node name="Tiles" type="Node2D" parent="."]
 
@@ -1264,6 +1267,7 @@ shape = SubResource("RectangleShape2D_kvuet")
 [connection signal="start_game" from="MainMenu/MMCanvasLayer" to="Player" method="_on_mm_canvas_layer_start_game"]
 [connection signal="timeout" from="Timers/PillTimer" to="." method="_on_pill_timer_timeout"]
 [connection signal="timeout" from="Timers/OfferingTeethTimer" to="Objects/OfferingTeeth" method="_on_offering_teeth_timer_timeout"]
+[connection signal="timeout" from="Timers/IntroTimer" to="HUD" method="_on_intro_timer_timeout"]
 [connection signal="rand_chest_spawned" from="Objects/Chests" to="Objects/Monsters" method="_on_chests_rand_chest_spawned"]
 [connection signal="chest_opened" from="Objects/Chests/Normal/Chest" to="." method="_on_chest_opened"]
 [connection signal="chest_opened" from="Objects/Chests/Normal/Chest2" to="." method="_on_chest_opened"]

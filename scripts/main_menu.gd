@@ -17,3 +17,4 @@ func _process(delta):
 func _on_mm_canvas_layer_start_game() -> void:
 	%MainMenuCamera.enabled = false
 	%HUD.visible = true
+	%IntroTimer.start()

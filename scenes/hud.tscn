@@ -40,6 +40,17 @@ theme_override_font_sizes/font_size = 50
 text = "You need 32 more teeth to complete the offering."
 autowrap_mode = 2
 
+[node name="Introduction" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 38.0
+offset_top = 32.0
+offset_right = 601.0
+offset_bottom = 353.0
+theme_override_fonts/font = ExtResource("3_5ysmq")
+theme_override_font_sizes/font_size = 50
+text = "Find me teeth. Or sacrifice yourself. There are some chests lying around if you don't want to give up."
+autowrap_mode = 2
+
 [node name="OfferComplete" type="Label" parent="."]
 unique_name_in_owner = true
 visible = false
